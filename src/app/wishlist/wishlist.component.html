@@ -1,0 +1,77 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <h1>Liste de souhait</h1>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">ISBN ou titre</label>
+        <div class="col-md-12 ">
+            <input #request class="form-control" id="pseudo" maxlength="30" name="pseudo"
+                placeholder="Ex : Les pilliers de la Terre" required="required" title="" type="text" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-star"></span> Rechercher
+            </button>
+        </div>
+    </div>
+</form>
+<ul style="list-style-type: none;">
+    <li *ngFor="let a of j">
+        <div class="table-responsive">
+            <table class="table table-dark" style="align-items: center;">
+                <tr>
+                    <td rowspan="5">
+                        <img *ngIf="a.volumeInfo.imageLinks" [src]=a.volumeInfo.imageLinks.thumbnail>
+                    </td>
+                    <td>
+                        <div *ngIf="a.volumeInfo.title; else ng1">
+                            <h3>Titre : {{a.volumeInfo.title}}</h3>
+                        </div>
+                        <ng-template #ng1>
+                            <h3>Titre : Indisponible</h3>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" (click) = "test($event)">Je&nbsp;le&nbsp;veux&nbsp;!</button>
+                    </td>
+                </tr>
+                <tr style="vertical-align:top;">
+                    <td>
+                        <div *ngIf="a.volumeInfo.authors; else ng2">
+                            <p>Auteur : {{a.volumeInfo.authors[0]}}</p>
+                        </div>
+                        <ng-template #ng2>
+                            <p>Auteur : Indisponible</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr style="vertical-align:top;">
+                    <td>
+                        <div *ngIf="a.volumeInfo.description; else ng3">
+                            <p>Description : {{a.volumeInfo.description}}</p>
+                        </div>
+                        <ng-template #ng3>
+                            <p>Description : Indisponible</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr style="vertical-align:top;">
+
+                    <td>
+                        <div *ngIf="a.volumeInfo.publisher; else ng4">
+                            <p>Editeur : {{a.volumeInfo.publisher}}</p>
+                        </div>
+                        <ng-template #ng4>
+                            <p>Editeur : Indisponible</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr style="vertical-align:top;">
+                    <td>
+                        <p>ISBN : {{a.volumeInfo.industryIdentifiers[0].identifier}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </li>
+</ul>

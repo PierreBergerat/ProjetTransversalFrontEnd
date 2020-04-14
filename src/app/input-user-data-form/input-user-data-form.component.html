@@ -1,0 +1,141 @@
+<form >
+    <h1>&nbsp;Se connecter</h1>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Courriel</label>
+        <div class="col-md-12 ">
+            <input #emailco class="form-control" id="pseudo" maxlength="30" name="pseudo" placeholder="JohnDoe13"
+                required="required" title="" type="email" />
+        </div>
+    </div>
+    <div class="form-group required"><label class="col-md-12 control-label">Mot de passe</label>
+        <div #passco class="col-md-12"><input class="form-control" id="password1" name="password1"
+                placeholder="123estunmauvaismotdepasse" required="required" title="" type="password" /></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-star"></span> Connexion
+            </button>
+        </div>
+    </div>
+</form>
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <h1>&nbsp;S'enregistrer</h1>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Nom</label>
+        <div class="col-md-12 ">
+            <input #nom class="form-control" id="nom" maxlength="30" name="nom" placeholder="Doe" required="required"
+                title="" type="text" />
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Prénom</label>
+        <div class="col-md-12 ">
+            <input #prenom class="form-control" id="prenom" maxlength="30" name="prenom" placeholder="John"
+                required="required" title="" type="text" />
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Date de naissance</label>
+        <div class="col-md-12 ">
+            <input #date class="form-control" id="date" maxlength="30" name="date" placeholder="00/00/0000" required="required"
+                title="" type="date" />
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Adresse</label>
+        <div class="col-md-12 ">
+            <input #adresse class="form-control" id="adresse" maxlength="64" name="adresse" placeholder="Rue des poussins 5B"
+                required="required" title="" type="text" />
+        </div>
+    </div>
+    <div class="form-group required">
+        <label class="col-md-12 control-label">Nationalité</label>
+        <div class="col-md-12 ">
+            <select #nationalite class="form-control col-md-12 custom-select custom-select-md" id="nationalite "name = "nationalite">
+                <option class="col-md-12 " hidden>Veuillez choisir un pays</option>
+                <option class="col-md-12 ">Albanie</option>
+                <option class="col-md-12 ">Allemagne</option>
+                <option class="col-md-12 ">Andorre</option>
+                <option class="col-md-12 ">Autriche</option>
+                <option class="col-md-12 ">Belgique</option>
+                <option class="col-md-12 ">Biélorussie</option>
+                <option class="col-md-12 ">Bosnie-Herzégovine</option>
+                <option class="col-md-12 ">Bulgarie</option>
+                <option class="col-md-12 ">Chypre</option>
+                <option class="col-md-12 ">Croatie</option>
+                <option class="col-md-12 ">Danemark</option>
+                <option class="col-md-12 ">Espagne</option>
+                <option class="col-md-12 ">Estonie</option>
+                <option class="col-md-12 ">Finlande</option>
+                <option class="col-md-12 ">France</option>
+                <option class="col-md-12 ">Grèce</option>
+                <option class="col-md-12 ">Hongrie</option>
+                <option class="col-md-12 ">Irlande</option>
+                <option class="col-md-12 ">Islande</option>
+                <option class="col-md-12 ">Italie</option>
+                <option class="col-md-12 ">Kosovo</option>
+                <option class="col-md-12 ">Lettonie</option>
+                <option class="col-md-12 ">Liechtenstein</option>
+                <option class="col-md-12 ">Lituanie</option>
+                <option class="col-md-12 ">Luxembourg</option>
+                <option class="col-md-12 ">Macédoine du Nord</option>
+                <option class="col-md-12 ">Malte</option>
+                <option class="col-md-12 ">Moldavie</option>
+                <option class="col-md-12 ">Monaco</option>
+                <option class="col-md-12 ">Monténégro</option>
+                <option class="col-md-12 ">Norvège</option>
+                <option class="col-md-12 ">Pays-Bas</option>
+                <option class="col-md-12 ">Pologne</option>
+                <option class="col-md-12 ">Portugal</option>
+                <option class="col-md-12 ">Roumanie</option>
+                <option class="col-md-12 ">Royaume-Uni</option>
+                <option class="col-md-12 ">Russie</option>
+                <option class="col-md-12 ">Saint-Marin</option>
+                <option class="col-md-12 ">Serbie</option>
+                <option class="col-md-12 ">Slovaquie</option>
+                <option class="col-md-12 ">Slovénie</option>
+                <option class="col-md-12 ">Suède</option>
+                <option class="col-md-12 ">Suisse</option>
+                <option class="col-md-12 ">République tchèque</option>
+                <option class="col-md-12 ">Ukraine</option>
+                <option class="col-md-12 ">Vatican</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Numéro de téléphone</label>
+        <div class="col-md-12 ">
+            <input #num class="form-control" id="num" maxlength="30" name="num" placeholder="022/000/00/00"
+                required="required" title="" type="text" />
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Courriel</label>
+        <div class="col-md-12 ">
+            <input #courriel class="form-control" id="courriel" maxlength="30" name="courriel" placeholder="JohnDoe@outlook.com"
+                required="required" title="" type="email" />
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Mot de passe</label>
+        <div class="col-md-12 ">
+            <input #motdepasse1 class="form-control" id="motdepasse1" maxlength="30" name="motdepasse1"
+                placeholder="123estunmauvaismotdepasse" required="required" title="" type="password" />
+        </div>
+    </div>
+    <div class="form-group required ">
+        <label class="col-md-12 control-label">Mot de passe (encore)</label>
+        <div class="col-md-12 ">
+            <input #motdepasse2 class="form-control" id="motdepasse2" maxlength="30" name="motdepasse2"
+                placeholder="123estunmauvaismotdepasse" required="required" title="" type="password" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-star"></span> M'enregistrer !
+            </button>
+        </div>
+    </div>
+</form>
