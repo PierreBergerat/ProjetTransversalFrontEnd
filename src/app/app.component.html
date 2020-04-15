@@ -1,22 +1,44 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <a class="navbar-brand" href="/">BookShare</a>
-    <ul class="navbar-nav nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="register">Connexion</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="add">Ajouter un livre</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="display">Catalogue</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="wishlist">Liste de souhaits</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="recommandations">Recommandations</a>
-      </li>
-    </ul>
+  <ul class="navbar-nav nav ml-auto">
+    <li class="nav-item">
+      <a *ngIf="hasCookie(); else connection0" class="nav-link" routerLinkActive="active" routerLink="interets">Intérêts</a>
+      <ng-template #connection0>
+        <a class="nav-link" routerLinkActive="active" routerLink="register">Intérêts</a>
+      </ng-template>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="hasCookie(); else connection1" class="nav-link" routerLinkActive="active" routerLink="add">Ajouter un livre</a>
+      <ng-template #connection1>
+        <a class="nav-link" routerLinkActive="active" routerLink="register">Ajouter un livre</a>
+      </ng-template>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="hasCookie(); else connection2" class="nav-link" routerLinkActive="active" routerLink="display">Catalogue</a>
+      <ng-template #connection2>
+        <a class="nav-link" routerLinkActive="active" routerLink="register">Catalogue</a>
+      </ng-template>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="hasCookie(); else connection3" class="nav-link" routerLinkActive="active" routerLink="wishlist">Liste de souhaits</a>
+      <ng-template #connection3>
+        <a class="nav-link" routerLinkActive="active" routerLink="register">Liste de souhaits</a>
+      </ng-template>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="hasCookie(); else connection4" class="nav-link" routerLinkActive="active"
+        routerLink="recommandations">Recommandations</a>
+      <ng-template #connection4>
+        <a class="nav-link" routerLinkActive="active" routerLink="register">Recommandations</a>
+      </ng-template>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="!hasCookie(); else co" class="nav-link" routerLinkActive="active" routerLink="register">Connexion</a>
+      <ng-template #co>
+        <a (click)="deleteCookie()" class="nav-link" routerLinkActive="active" routerLink="">Déconnexion</a>
+      </ng-template>
+    </li>
+  </ul>
 </nav>
 <div class="container">
   <router-outlet>

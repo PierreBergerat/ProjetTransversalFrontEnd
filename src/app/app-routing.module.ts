@@ -1,3 +1,4 @@
+import { InteretsComponent } from './interets/interets.component';
 import { RecommandationsComponent } from './recommandations/recommandations.component';
 import { PagedaccueilComponent } from './pagedaccueil/pagedaccueil.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
@@ -24,6 +25,9 @@ const routes: Routes = [
     path: 'wishlist', component: WishlistComponent
   }, {
     path: 'recommandations', component: RecommandationsComponent
+  },
+  {
+    path: 'interets', component: InteretsComponent
   }
 ];
 

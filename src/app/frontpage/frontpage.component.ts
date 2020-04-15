@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Livre } from './../Class/livre';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -25,7 +26,7 @@ export class FrontpageComponent implements OnInit {
   api = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
   request = "";
   checkoutForm;
-  constructor(private httpClient: HttpClient, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private httpClient: HttpClient, private router: Router, private formBuilder: FormBuilder, private cookieService: CookieService) {
     this.checkoutForm = this.formBuilder.group({});
   }
   onKey(event) { this.request = event.target.value; }
@@ -74,11 +75,16 @@ export class FrontpageComponent implements OnInit {
       console.log("error");
     }
   } ngOnInit(): void {
+    if (this.cookieService.get('ID')) {
+      console.log("Bite");
+    } else {
+      console.log("Alors on est pas co ?");
+    };
   }
   onSubmit() {
     // Process checkout data here
     console.warn('Your order has been submitted');
     if (this.titre.nativeElement.value && this.titre.nativeElement.value && this.auteur.nativeElement.value && this.description.nativeElement.value && this.genre.nativeElement.value && this.edition.nativeElement.value && this.anneeParution.nativeElement.value && this.langue.nativeElement.value)
-      this.router.navigate(['/']);
+      this.router.navigate(['/display']);
   }
 }

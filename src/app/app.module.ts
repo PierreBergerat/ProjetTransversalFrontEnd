@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpInterceptor, HttpRequest, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +13,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { PagedaccueilComponent } from './pagedaccueil/pagedaccueil.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RecommandationsComponent } from './recommandations/recommandations.component';
+import { InteretsComponent } from './interets/interets.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RecommandationsComponent } from './recommandations/recommandations.comp
     PagedaccueilComponent,
     WishlistComponent,
     RecommandationsComponent,
+    InteretsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { RecommandationsComponent } from './recommandations/recommandations.comp
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

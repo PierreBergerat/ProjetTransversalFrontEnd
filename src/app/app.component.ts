@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'bookShare';
+  hasCookie() {
+   return this.CookieService.get('ID');
+  }
+  deleteCookie(){
+    console.log("click")
+    this.CookieService.deleteAll();
+  }
+  constructor(private CookieService: CookieService) { }
 }

@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Client } from './../Class/client';
 import { Router } from '@angular/router';
 import { Component, OnInit, NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./input-user-data-form.component.css']
 })
 export class InputUserDataFormComponent implements OnInit {
+  private cookieValue: String;
   @ViewChild('emailco') emailco: ElementRef;
   @ViewChild('passco') passco: ElementRef;
   @ViewChild('nom') nom: ElementRef;
@@ -24,16 +26,21 @@ export class InputUserDataFormComponent implements OnInit {
   @ViewChild('motdepasse2') motdepasse2: ElementRef;
 
   checkoutForm;
-  constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpClient) {
+  connectForm;
+  constructor(private cookieService: CookieService, private formBuilder: FormBuilder, private router: Router, private http: HttpClient, private formBuilder2: FormBuilder) {
     this.checkoutForm = this.formBuilder.group({});
+    this.connectForm = this.formBuilder2.group({});
   }
   ngOnInit(): void {
-
   }
+
   onConnectAttempt() {
     if (this.emailco.nativeElement.value && this.passco.nativeElement.value) {
       //TODO
-      this.http.get("localhost:3000", { responseType: 'text' }).subscribe(res => { });
+      this.cookieService.set('ID', '12345');
+      console.log(this.cookieService.get('ID'));
+      this.router.navigate(["/display"]);
+      //this.http.get("localhost:3000", { responseType: 'text' }).subscribe(res => { });
     }
   }
   onSubmit() {
@@ -48,6 +55,7 @@ export class InputUserDataFormComponent implements OnInit {
         this.courriel.nativeElement.value,
         this.motdepasse1.nativeElement.value, 0)
       console.log(client);
+      this.router.navigate(["/interets"]);
     }
     else {
       console.log("ERROR");

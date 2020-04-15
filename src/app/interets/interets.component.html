@@ -1,0 +1,576 @@
+<div class="container">
+    <a #anchor href="#alert"></a>
+    <div #error class="alert alert-danger" style="display:none;">
+        <strong>Erreur</strong> Veuillez entrer au moins 5 auteurs et 5 genres.
+    </div>
+    <div>
+        <div class="form-group required ">
+            <label class="col-md-12 control-label" style="font-weight:bold;">Auteurs</label>
+            <div class="col-md-12 ">
+                <div class="input-group">
+                    <input #auteur class="form-control" id="nom" maxlength="30" name="nom" placeholder="Doe"
+                        required="required" title="" type="text" />
+                    <span class="input-group-btn">
+                        <button (click)="rechercheAuteur()" class="btn btn-primary" type="button">Ajouter</button>
+                    </span>
+                </div>
+                <ul class="col-md-6 list-group" style="list-style-type: none;">
+                    <li class="list-group-item d-flex justify-content-between" *ngFor="let author of authors">
+                        <p class="p-0 m-0 flex-grow-1">{{ author }}</p>
+                        <button (click)="removeAuthor($event)" class="btn btn-primary">X</button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Art poétique</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check1"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check1">Ballade</label></div>
+                </td>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check2"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check2">Calligramme</label></div>
+                </td>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check3"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check3">Chanson</label></div>
+                </td>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check4"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check4">Chant royal</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check5"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check5">Élégie</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check6"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check6">Épigramme</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check7"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check7">Épopée</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check8"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check8">Fable</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check9"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check9">Fatrasie</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check10"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check10">Ghazel</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check11"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check11">Haïku</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check12"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check12">Hyangga</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check13"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check13">yōshi</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check14"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check14">Lai</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check15"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check15">Madrigal</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check16"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check16">Miscellanées</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check17"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check17">Motet</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check18"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check18">Ode</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check19"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check19">Pastourelle</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check20"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check20">Poème autobiographique</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check21"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check21">Poésie en prose</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check22"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check22">Poésie pastorale</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check23"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check23">Poésie philosophique</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check24"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check24">Poème de cinq lignes</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check25"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check25">Oaristys</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check26"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check26">Rondeau</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check27"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check27">Rondel</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check28"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check28">Triolet</label></div>
+                </td>
+            </tr>
+            <tr>
+                <th>Roman</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check29"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check29"></label>Roman courtois</div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check30"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check30"></label>Roman historique</div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check31"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check31">Roman épistolaire</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check32"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check32">Roman-mémoires</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check33"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check33">Roman d'amour</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check34"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check34">Roman industriel</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check35"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check35">Nouvelle fiction</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check36"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check36">Non-fiction</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check37"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check37">True crime</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check38"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check38">Roman d'aventures</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check39"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check39">Roman noir</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check40"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check40">Roman policier</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check41"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check41">Roman d'espionnage</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check42"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check42">Mondes perdus</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check43"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check43">Science-fiction</label></div>
+                </td>
+
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check44"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check44">Anticipation</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check45"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check45">Cyberpunk</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check46"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check46">Steampunk</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check47"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check47">Space Opera</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check48"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check48">Science-fiction humoristique</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check49"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check49">Fantasy</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check50"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check50">Light fantasy</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check51"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check51">High fantasy</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check52"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check52">Fantastique</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check53"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check53">Horreur</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check54"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check54">Biographie</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check55"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check55">Autobiographie</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check56"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check56">Autofiction</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check57"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check57">Journal intime</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check58"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check58">Mémoires</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check59"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check59">Confessions</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check60"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check60">Conte</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check61"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check61">Nouvelle</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check62"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check62">Micronouvelle</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check63"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check63">Fragment</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check64"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check64">Témoignage</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check65"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check65">Reportage</label></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Pièce de théâtre</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check66"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check66">Tragédie</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check67"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check67">Comédie</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check68"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check68">Tragicomédie</label></div>
+                </td>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check73"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check73">Mystère</label></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check70"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check70">Farce</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check71"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check71">Drame</label></div>
+                </td>
+
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="check72"
+                            (change)="updateCheckedOptions($event)">
+                        <label class="custom-control-label" for="check72">Miracle</label></div>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> <button type="button" class="btn btn-success" (click)="verif()">Valider</button></td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+        </table>
+    </div>
+</div>

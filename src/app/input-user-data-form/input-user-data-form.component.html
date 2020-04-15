@@ -1,14 +1,14 @@
-<form >
+<form [formGroup]="connectForm" (ngSubmit)="onConnectAttempt()">
     <h1>&nbsp;Se connecter</h1>
     <div class="form-group required ">
         <label class="col-md-12 control-label">Courriel</label>
         <div class="col-md-12 ">
-            <input #emailco class="form-control" id="pseudo" maxlength="30" name="pseudo" placeholder="JohnDoe13"
+            <input #emailco class="form-control" id="emailco" maxlength="30" name="emailco" placeholder="JohnDoe13"
                 required="required" title="" type="email" />
         </div>
     </div>
     <div class="form-group required"><label class="col-md-12 control-label">Mot de passe</label>
-        <div #passco class="col-md-12"><input class="form-control" id="password1" name="password1"
+        <div class="col-md-12"><input #passco class="form-control" id="passco" name="passco"
                 placeholder="123estunmauvaismotdepasse" required="required" title="" type="password" /></div>
     </div>
     <div class="form-group">
