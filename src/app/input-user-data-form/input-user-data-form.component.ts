@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InputUserDataFormComponent implements OnInit {
   private cookieValue: String;
+  private client: Client;
   @ViewChild('emailco') emailco: ElementRef;
   @ViewChild('passco') passco: ElementRef;
   @ViewChild('nom') nom: ElementRef;
@@ -45,7 +46,7 @@ export class InputUserDataFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.nom.nativeElement.value && this.prenom.nativeElement.value && this.date.nativeElement.value && this.adresse.nativeElement.value && (this.nationalite.nativeElement.value != "Veuillez choisir un pays") && this.num.nativeElement.value && this.courriel.nativeElement.value && this.motdepasse1.nativeElement.value && this.motdepasse2.nativeElement.value) {
-      var client = new Client(
+      this.client = new Client(
         this.nom.nativeElement.value,
         this.prenom.nativeElement.value,
         this.date.nativeElement.value,
@@ -54,8 +55,16 @@ export class InputUserDataFormComponent implements OnInit {
         this.num.nativeElement.value,
         this.courriel.nativeElement.value,
         this.motdepasse1.nativeElement.value, 0)
-      console.log(client);
-      this.router.navigate(["/interets"]);
+      console.log(this.client);
+      var personne = {
+        "Nom": this.client.nom,
+        "Prenom": this.client.prenom,
+        "Date_naissance": this.client.date,
+        "Nationalite": this.client.nationalite
+      };
+      /*this.http.post('http://localhost:3000/', personne, { responseType: 'text' })
+        .subscribe(response => { var j = JSON.parse(response); console.log(j);  });*/
+      //this.router.navigate(["/interets"]);
     }
     else {
       console.log("ERROR");
