@@ -11,5 +11,9 @@ export class DisplayUserDataComponent implements OnInit {
   public j;
   constructor(private router: Router, private httpClient: HttpClient) { }
   ngOnInit(): void {
+    this.httpClient.get("http://localhost:3000/livres", { responseType: 'text' }).subscribe(res => {
+      console.log(res);
+      var j = JSON.parse(res);
+    })
   }
 }

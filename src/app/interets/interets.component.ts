@@ -42,6 +42,8 @@ export class InteretsComponent implements OnInit {
   verif() {
     if (this.genres.size >= 5 && this.authors.size >= 5) {
       console.log("OK");
+      //requete interet auteur
+      //requete interet livre
     } else {
       console.log("Pas ok");
     }

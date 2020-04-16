@@ -92,7 +92,7 @@ export class FrontpageComponent implements OnInit {
     }
   } ngOnInit(): void {
     if (this.cookieService.get('ID')) {
-      console.log("Bite");
+      console.log("Got an ID");
     } else {
       console.log("Alors on est pas co ?");
     };
@@ -109,6 +109,10 @@ export class FrontpageComponent implements OnInit {
       console.log(arrayGenre);
       var livre = new Livre(this.request, this.titre.nativeElement.value, this.auteur.nativeElement.value, this.description.nativeElement.value, arrayGenre, this.edition.nativeElement.value, this.anneeParution.nativeElement.value, this.langue.nativeElement.value);
       console.log(livre);
+      var clientRequete = {
+
+      }
+      this.httpClient.post;
     } else {
       console.log("Error please fill all fields");
     }

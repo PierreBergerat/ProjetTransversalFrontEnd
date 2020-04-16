@@ -12,6 +12,9 @@ public j;
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    //requeteBoth
+    //requeteAuteur
+    //requeteGenre
   }
 
 }
