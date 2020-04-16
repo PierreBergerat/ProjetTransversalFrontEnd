@@ -36,10 +36,18 @@ export class InputUserDataFormComponent implements OnInit {
 
   onConnectAttempt() {
     if (this.emailco.nativeElement.value && this.passco.nativeElement.value) {
-      //TODO
-      this.cookieService.set('ID', '12345');
-      console.log(this.cookieService.get('ID'));
-      this.router.navigate(["/display"]);
+      var request = "http://localhost:3000/clients";
+      var email = this.emailco.nativeElement.value;
+      var motDePasse = this.passco.nativeElement.value;
+      var requestFinal = request + '/' + email + '/' + motDePasse;
+      console.log(requestFinal);
+      this.http.get('http://localhost:3000/clients', { responseType: 'text' }).subscribe(response => {
+        var i = JSON.parse(response);
+        console.log(i);
+        /*this.cookieService.set('ID', '12345');
+        console.log(this.cookieService.get('ID'));
+        this.router.navigate(["/display"]);*/
+      });
       //this.http.get("localhost:3000", { responseType: 'text' }).subscribe(res => { });
     }
   }
