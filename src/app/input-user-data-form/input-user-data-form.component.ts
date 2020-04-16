@@ -65,7 +65,7 @@ export class InputUserDataFormComponent implements OnInit {
       /*this.http.post('http://localhost:3000/', personne, { responseType: 'text' })
         .subscribe(response => { var j = JSON.parse(response); console.log(j);  });*/
         //test;
-        console.log("bite");
+        console.log("prêt à envoyer");
       //this.router.navigate(["/interets"]);
     }
     else {
