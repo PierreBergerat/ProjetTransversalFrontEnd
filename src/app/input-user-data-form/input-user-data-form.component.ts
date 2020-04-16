@@ -13,7 +13,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InputUserDataFormComponent implements OnInit {
   private cookieValue: String;
-  private client: Client;
   @ViewChild('emailco') emailco: ElementRef;
   @ViewChild('passco') passco: ElementRef;
   @ViewChild('nom') nom: ElementRef;
@@ -46,7 +45,7 @@ export class InputUserDataFormComponent implements OnInit {
   }
   onSubmit() {
     if (this.nom.nativeElement.value && this.prenom.nativeElement.value && this.date.nativeElement.value && this.adresse.nativeElement.value && (this.nationalite.nativeElement.value != "Veuillez choisir un pays") && this.num.nativeElement.value && this.courriel.nativeElement.value && this.motdepasse1.nativeElement.value && this.motdepasse2.nativeElement.value) {
-      this.client = new Client(
+      var client = new Client(
         this.nom.nativeElement.value,
         this.prenom.nativeElement.value,
         this.date.nativeElement.value,
@@ -55,17 +54,30 @@ export class InputUserDataFormComponent implements OnInit {
         this.num.nativeElement.value,
         this.courriel.nativeElement.value,
         this.motdepasse1.nativeElement.value, 0)
-      console.log(this.client);
+      console.log(client);
       var personne = {
-        "Nom": this.client.nom,
-        "Prenom": this.client.prenom,
-        "Date_naissance": this.client.date,
-        "Nationalite": this.client.nationalite
+        "Nom": client.nom,
+        "Prenom": client.prenom,
+        "Date_naissance": client.date,
+        "Nationalite": client.nationalite
       };
-      /*this.http.post('http://localhost:3000/', personne, { responseType: 'text' })
-        .subscribe(response => { var j = JSON.parse(response); console.log(j);  });*/
-        //test;
-        console.log("prêt à envoyer");
+      this.http.post('http://localhost:3000/personnes', personne, { responseType: 'text' })
+        .subscribe(response => {
+          var j = JSON.parse(response);
+          console.log(j.id);
+          var personne2 = {
+            "ID_personne": j.id,
+            "Numero_telephone": client.num,
+            "Adresse_client": client.adresse,
+            "Credits": client.credits,
+            "Courriel": client.courriel,
+            "Mot_de_passe": client.motdepasse
+          };
+          this.http.post('http://localhost:3000/clients', personne2, { responseType: 'text' }).subscribe(response => {
+            var i = JSON.parse(response);
+            console.log(i);
+          });
+        });
       //this.router.navigate(["/interets"]);
     }
     else {
