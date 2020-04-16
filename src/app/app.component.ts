@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'bookShare';
   hasCookie() {
-   return this.CookieService.get('ID');
+   return this.CookieService.get('ID_USER');
   }
   deleteCookie(){
     console.log("click")

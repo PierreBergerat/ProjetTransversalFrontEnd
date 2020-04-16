@@ -36,17 +36,24 @@ export class InputUserDataFormComponent implements OnInit {
 
   onConnectAttempt() {
     if (this.emailco.nativeElement.value && this.passco.nativeElement.value) {
-      var request = "http://localhost:3000/clients";
+      var request = "http://localhost:3000/clients/verification";
       var email = this.emailco.nativeElement.value;
       var motDePasse = this.passco.nativeElement.value;
       var requestFinal = request + '/' + email + '/' + motDePasse;
       console.log(requestFinal);
-      this.http.get('http://localhost:3000/clients', { responseType: 'text' }).subscribe(response => {
-        var i = JSON.parse(response);
-        console.log(i);
-        this.cookieService.set('ID', '12345');
-        console.log(this.cookieService.get('ID'));
-        this.router.navigate(["/display"]);
+      this.http.get(requestFinal, { responseType: 'text' }).subscribe(response => {
+        if (response) {
+          var i = JSON.parse(response);
+          if (i.ID_personne) {
+            this.cookieService.set('ID_USER', i.ID_personne);
+            console.log(this.cookieService.get('ID_USER'));
+            this.router.navigate(["/display"]);
+          } else {
+            console.log("Error account do not exist")
+          }
+        } else {
+          console.log("Error ");
+        }
       });
     }
   }
@@ -77,24 +84,34 @@ export class InputUserDataFormComponent implements OnInit {
         "Date_naissance": client.date,
         "Nationalite": client.nationalite
       };
-      this.http.post('http://localhost:3000/personnes', personne, { responseType: 'text' })
-        .subscribe(response => {
-          var j = JSON.parse(response);
-          console.log(j.id);
-          var personne2 = {
-            "ID_personne": j.id,
-            "Numero_telephone": client.num,
-            "Adresse_client": client.adresse,
-            "Credits": client.credits,
-            "Courriel": client.courriel,
-            "Mot_de_passe": client.motdepasse
-          };
-          this.http.post('http://localhost:3000/clients', personne2, { responseType: 'text' }).subscribe(response => {
-            var i = JSON.parse(response);
-            console.log(i);
-          });
-        });
-      //this.router.navigate(["/interets"]);
+      var verifmail = "http://localhost:3000/clients/verificationMAIL/" + this.courriel.nativeElement.value
+      console.log(verifmail);
+      this.http.get(verifmail, { responseType: 'text' }).subscribe(res => {
+        var k = JSON.parse(res)
+        console.log(k.resultat);
+        if (k.resultat == false) {
+          this.http.post('http://localhost:3000/personnes', personne, { responseType: 'text' })
+            .subscribe(response => {
+              var j = JSON.parse(response);
+              console.log(j.id);
+              var personne2 = {
+                "ID_personne": j.id,
+                "Numero_telephone": client.num,
+                "Adresse_client": client.adresse,
+                "Credits": client.credits,
+                "Courriel": client.courriel,
+                "Mot_de_passe": client.motdepasse
+              };
+              this.http.post('http://localhost:3000/clients', personne2, { responseType: 'text' }).subscribe(response => {
+                var i = JSON.parse(response);
+                console.log(i);
+                this.router.navigate(["/register"]);
+              });
+            });
+        } else {
+          console.log("Error. This email already exists");
+        }
+      })
     }
     else {
       console.log("ERROR");

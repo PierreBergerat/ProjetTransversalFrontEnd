@@ -1,10 +1,10 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Livre } from './../Class/livre';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { ViewChild, ElementRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-frontpage',
@@ -110,13 +110,23 @@ export class FrontpageComponent implements OnInit {
       var livre = new Livre(this.request, this.titre.nativeElement.value, this.auteur.nativeElement.value, this.description.nativeElement.value, arrayGenre, this.edition.nativeElement.value, this.anneeParution.nativeElement.value, this.langue.nativeElement.value);
       console.log(livre);
       var clientRequete = {
-
+        "ID_Personne_Enregistre": Number(this.cookieService.get("ID_USER")),
+        "ISBN": this.request,
+        "Titre": this.titre.nativeElement.value,
+        "Description": this.description.nativeElement.value,
+        "Editeur": this.edition.nativeElement.value,
+        "Annee_parution": this.anneeParution.nativeElement.value,
+        "Langue": this.langue.nativeElement.value,
+        "Verifie": 1
       }
-      this.httpClient.post;
+      console.log(clientRequete);
+      this.httpClient.post('http://localhost:3000/livres', clientRequete, { responseType: 'text' }).subscribe(response => {
+        var r = JSON.parse(response);
+        var R_ID = r.id;
+      })
     } else {
       console.log("Error please fill all fields");
     }
-
-    //this.router.navigate(['/display']);
+    this.router.navigate(['/add']);
   }
 }

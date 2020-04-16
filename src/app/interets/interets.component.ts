@@ -10,6 +10,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class InteretsComponent implements OnInit {
   private requete = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
   @ViewChild('auteur') auteur: ElementRef;
+  @ViewChild('table') table: ElementRef;
   public authors: Set<String>;
   public genres: Set<String>;
   genreForm;
@@ -40,6 +41,16 @@ export class InteretsComponent implements OnInit {
   }
 
   verif() {
+    /* var s = document.getElementsByClassName('custom-control-label')
+     for (var i = 0; i < s.length; i++) {
+       var paquet = {
+         "Genre": s[i].innerHTML
+       }
+       console.log(paquet)
+       this.http.post("http://localhost:3000/genres", paquet, { responseType: 'text' }).subscribe(res => {
+         console.log(res)
+       })
+     }*/
     if (this.genres.size >= 5 && this.authors.size >= 5) {
       console.log("OK");
       //requete interet auteur
