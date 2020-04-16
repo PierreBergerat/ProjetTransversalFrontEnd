@@ -41,13 +41,13 @@ export class InputUserDataFormComponent implements OnInit {
       var motDePasse = this.passco.nativeElement.value;
       var requestFinal = request + '/' + email + '/' + motDePasse;
       console.log(requestFinal);
-      this.http.get('http://localhost:3000/clients', { responseType: 'text' }).subscribe(response => {
+      /*this.http.get('http://localhost:3000/clients', { responseType: 'text' }).subscribe(response => {
         var i = JSON.parse(response);
-        console.log(i);
-        /*this.cookieService.set('ID', '12345');
+        console.log(i);*/
+        this.cookieService.set('ID', '12345');
         console.log(this.cookieService.get('ID'));
-        this.router.navigate(["/display"]);*/
-      });
+        this.router.navigate(["/display"]);
+     /* });*/
       //this.http.get("localhost:3000", { responseType: 'text' }).subscribe(res => { });
     }
   }

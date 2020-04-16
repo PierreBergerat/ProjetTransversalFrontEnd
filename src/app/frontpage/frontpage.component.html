@@ -37,33 +37,114 @@
                 placeholder="Ex : XIIe siècle. L'Angleterre est déchirée par la guerre civile et affaiblie par la famine et une épouvantable crise religieuse. À Kingsbridge, la construction de la plus grande cathédrale du monde suscite rivalités, violences et luttes de pouvoir. Les destins de Philip, le prieur, Jack, le bâtisseur ou la jeune aristocrate Aliena s'entremêlent dans cette superbe épopée romanesque où l'amour et la haine sont omniprésents. Une fresque monumentale par le plus grand bâtisseur de romans historiques de notre époque."
                 required="required" title="" type="text" disabled rows="4" style="resize: none;"></textarea>
         </div>
-        <div class="form-group required">
-            <label class="col-md-4 control-label">Genre</label>
-            <div class="col-md-4"><input #genre class="form-control" id="genre" maxlength="30" name="genre"
-                    placeholder="Ex : Fiction" required="required" title="" type="text" disabled /></div>
+    </div>
+    <div class="form-group required">
+        <label class="col-md-4 control-label">Genre</label>
+        <div class="col-md-4">
+            <select #genre class="selectpicker required form-control" data-live-search="true" size="7"
+                data-live-search-style="startsWith" multiple disabled>
+                <optgroup label="Roman">
+                    <option class="option-class">Roman courtois</option>
+                    <option class="option-class" class="option-class">Roman historique</option>
+                    <option class="option-class">Roman épistolaire</option>
+                    <option class="option-class">Roman-mémoires</option>
+                    <option class="option-class">Roman d'amour</option>
+                    <option class="option-class">Roman industriel</option>
+                    <option class="option-class">fiction</option>
+                    <option class="option-class">Non-fiction</option>
+                    <option class="option-class">True crime</option>
+                    <option class="option-class">Roman d'aventures</option>
+                    <option class="option-class">Roman noir</option>
+                    <option class="option-class">Roman policier</option>
+                    <option class="option-class">Roman d'espionnage</option>
+                    <option class="option-class">Mondes perdus</option>
+                    <option class="option-class">Science-fiction</option>
+                    <option class="option-class">Anticipation</option>
+                    <option class="option-class">Cyberpunk</option>
+                    <option class="option-class">Steampunk</option>
+                    <option class="option-class">Space Opera</option>
+                    <option class="option-class">Science-fiction humoristique</option>
+                    <option class="option-class">Fantasy</option>
+                    <option class="option-class">Light fantasy</option>
+                    <option class="option-class">High fantasy</option>
+                    <option class="option-class">Fantastique</option>
+                    <option class="option-class">Horreur</option>
+                    <option class="option-class">Biographie</option>
+                    <option class="option-class">Autobiographie</option>
+                    <option class="option-class">Autofiction</option>
+                    <option class="option-class">Journal intime</option>
+                    <option class="option-class">Mémoires</option>
+                    <option class="option-class">Confessions</option>
+                    <option class="option-class">Conte</option>
+                    <option class="option-class">Nouvelle</option>
+                    <option class="option-class">Micronouvelle</option>
+                    <option class="option-class">Fragment</option>
+                    <option class="option-class">Témoignage</option>
+                    <option class="option-class">Reportage</option>
+                </optgroup>
+                <optgroup label="Théâtre">
+                    <option class="option-class">Tragédie</option>
+                    <option class="option-class">Comédie</option>
+                    <option class="option-class">Tragicomédie</option>
+                    <option class="option-class">Farce</option>
+                    <option class="option-class">Drame</option>
+                    <option class="option-class">Miracle</option>
+                    <option class="option-class">Mystère</option>
+                </optgroup>
+                <optgroup label="Poésie">
+                    <option class="option-class">Ballade</option>
+                    <option class="option-class">Calligramme</option>
+                    <option class="option-class">Chanson</option>
+                    <option class="option-class">Chant royal</option>
+                    <option class="option-class">Élégie</option>
+                    <option class="option-class">Épigramme</option>
+                    <option class="option-class">Épopée</option>
+                    <option class="option-class">Fable</option>
+                    <option class="option-class">Fatrasie</option>
+                    <option class="option-class">Ghazel</option>
+                    <option class="option-class">Haïku</option>
+                    <option class="option-class">Hyangga</option>
+                    <option class="option-class">yōshi</option>
+                    <option class="option-class">Lai</option>
+                    <option class="option-class">Madrigal</option>
+                    <option class="option-class">Miscellanées</option>
+                    <option class="option-class">Motet</option>
+                    <option class="option-class">Ode</option>
+                    <option class="option-class">Pastourelle</option>
+                    <option class="option-class">Poème autobiographique</option>
+                    <option class="option-class">Poésie en prose</option>
+                    <option class="option-class">Poésie pastorale</option>
+                    <option class="option-class">Poésie philosophique</option>
+                    <option class="option-class">Poème de cinq lignes</option>
+                    <option class="option-class">Oaristys</option>
+                    <option class="option-class">Rondeau</option>
+                    <option class="option-class">Rondel</option>
+                    <option class="option-class">Triolet</option>
+                </optgroup>
+            </select>
         </div>
-        <div class="form-group required">
-            <label class="col-md-4 control-label">Edition</label>
-            <div class="col-md-4"><input #edition class="form-control" id="edition" maxlength="30" name="edition"
-                    placeholder="Ex : Robert Laffont" required="required" title="" type="text" disabled /></div>
+    </div>
+    <div class="form-group required">
+        <label class="col-md-4 control-label">Edition</label>
+        <div class="col-md-4"><input #edition class="form-control" id="edition" maxlength="30" name="edition"
+                placeholder="Ex : Robert Laffont" required="required" title="" type="text" disabled /></div>
+    </div>
+    <div class="form-group required">
+        <label class="col-md-4 control-label">Annee de parution</label>
+        <div class="col-md-4"><input #anneeParution class="form-control" id="anneeParution" maxlength="30"
+                name="anneeParution" placeholder="Ex : 2015" required="required" title="" type="text" disabled />
         </div>
-        <div class="form-group required">
-            <label class="col-md-4 control-label">Annee de parution</label>
-            <div class="col-md-4"><input #anneeParution class="form-control" id="anneeParution" maxlength="30"
-                    name="anneeParution" placeholder="Ex : 2015" required="required" title="" type="text" disabled />
-            </div>
-        </div>
-        <div class="form-group required">
-            <label class="col-md-4 control-label">Langue</label>
-            <div class="col-md-4"><input #langue class="form-control" id="langue" maxlength="30" name="langue"
-                    placeholder="Ex : fr" required="required" title="" type="text" disabled /></div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-                <button #valider type="submit" class="btn btn-primary" disabled>
-                    <span class="glyphicon glyphicon-star"></span> Valider
-                </button>
-            </div>
+    </div>
+    <div class="form-group required">
+        <label class="col-md-4 control-label">Langue</label>
+        <div class="col-md-4"><input #langue class="form-control" id="langue" maxlength="30" name="langue"
+                placeholder="Ex : fr" required="required" title="" type="text" disabled /></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <button #valider type="submit" class="btn btn-primary" disabled>
+                <span class="glyphicon glyphicon-star"></span> Valider
+            </button>
         </div>
     </div>
 </form>

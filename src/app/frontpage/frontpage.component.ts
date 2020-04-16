@@ -16,6 +16,7 @@ export class FrontpageComponent implements OnInit {
   @ViewChild('auteur') auteur: ElementRef;
   @ViewChild('description') description: ElementRef;
   @ViewChild('genre') genre: ElementRef;
+  @ViewChild('genre') genretab: Array<HTMLSelectElement>
   @ViewChild('edition') edition: ElementRef;
   @ViewChild('anneeParution') anneeParution: ElementRef;
   @ViewChild('langue') langue: ElementRef;
@@ -46,17 +47,32 @@ export class FrontpageComponent implements OnInit {
         this.valider.nativeElement.disabled = true;
         var j = JSON.parse(res);
         if (j.items) {
-          this.miniature.nativeElement.src = j.items[0].volumeInfo.imageLinks.thumbnail;
-          this.titre.nativeElement.value = j.items[0].volumeInfo.title;
-          this.auteur.nativeElement.value = j.items[0].volumeInfo.authors[0];
-          this.description.nativeElement.value = j.items[0].volumeInfo.description;
-          this.genre.nativeElement.value = j.items[0].volumeInfo.categories[0];
-          this.edition.nativeElement.value = j.items[0].volumeInfo.publisher;
-          this.anneeParution.nativeElement.value = j.items[0].volumeInfo.publishedDate.toString().split('-')[0];
-          this.langue.nativeElement.value = j.items[0].volumeInfo.language;
+          if (j.items[0].volumeInfo.imageLinks) {
+            this.miniature.nativeElement.src = j.items[0].volumeInfo.imageLinks.thumbnail
+          };
+          if (j.items[0].volumeInfo.title) {
+            this.titre.nativeElement.value = j.items[0].volumeInfo.title;
+          }
+          else {
+            this.titre.nativeElement.disabled = false;
+          }
+          if (j.items[0].volumeInfo.authors) {
+            this.auteur.nativeElement.value = j.items[0].volumeInfo.authors[0];
+          } else { this.auteur.nativeElement.disabled = false; }
+          if (j.items[0].volumeInfo.description) {
+            this.description.nativeElement.value = j.items[0].volumeInfo.description;
+          } else { this.description.nativeElement.disabled = false; }
+          this.genre.nativeElement.disabled = false;
+          if (j.items[0].volumeInfo.publisher) {
+            this.edition.nativeElement.value = j.items[0].volumeInfo.publisher;
+          } else { this.edition.nativeElement.disabled = false; }
+          if (j.items[0].volumeInfo.publishedDate) {
+            this.anneeParution.nativeElement.value = j.items[0].volumeInfo.publishedDate.toString().split('-')[0];
+          } else { this.anneeParution.nativeElement.disabled = false; }
+          if (j.items[0].volumeInfo.language) {
+            this.langue.nativeElement.value = j.items[0].volumeInfo.language;
+          } else { this.langue.nativeElement.disabled = false; }
           this.valider.nativeElement.disabled = false;
-          var livre = new Livre(this.request, this.titre.nativeElement.value, this.auteur.nativeElement.value, this.description.nativeElement.value, this.genre.nativeElement.value, this.edition.nativeElement.value, this.anneeParution.nativeElement.value, this.langue.nativeElement.value);
-          console.log(livre);
         } else {
           this.error.nativeElement.style.display = "";
           this.ancre.nativeElement.scrollIntoView();
@@ -83,8 +99,20 @@ export class FrontpageComponent implements OnInit {
   }
   onSubmit() {
     // Process checkout data here
-    console.warn('Your order has been submitted');
-    if (this.titre.nativeElement.value && this.titre.nativeElement.value && this.auteur.nativeElement.value && this.description.nativeElement.value && this.genre.nativeElement.value && this.edition.nativeElement.value && this.anneeParution.nativeElement.value && this.langue.nativeElement.value)
-      this.router.navigate(['/display']);
+    if (this.titre.nativeElement.value && this.titre.nativeElement.value && this.auteur.nativeElement.value && this.description.nativeElement.value && this.genre.nativeElement.value && this.edition.nativeElement.value && this.anneeParution.nativeElement.value && this.langue.nativeElement.value) {
+      var arrayGenre = new Array<String>();
+      for (var i = 0; i < 72; i++) {
+        if (this.genre.nativeElement.querySelectorAll('.option-class')[i].selected) {
+          arrayGenre.push(this.genre.nativeElement.querySelectorAll('.option-class')[i].innerText);
+        };
+      }
+      console.log(arrayGenre);
+      var livre = new Livre(this.request, this.titre.nativeElement.value, this.auteur.nativeElement.value, this.description.nativeElement.value, arrayGenre, this.edition.nativeElement.value, this.anneeParution.nativeElement.value, this.langue.nativeElement.value);
+      console.log(livre);
+    } else {
+      console.log("Error please fill all fields");
+    }
+
+    //this.router.navigate(['/display']);
   }
 }
