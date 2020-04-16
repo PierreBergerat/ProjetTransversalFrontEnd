@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-recommandations',
@@ -6,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recommandations.component.css']
 })
 export class RecommandationsComponent implements OnInit {
-
-  constructor() { }
+public j;
+  constructor(private router: Router, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
-//https://www.googleapis.com/books/v1/volumes?q=Osez+la+sodomie
+
 }
