@@ -44,15 +44,24 @@ export class InputUserDataFormComponent implements OnInit {
       /*this.http.get('http://localhost:3000/clients', { responseType: 'text' }).subscribe(response => {
         var i = JSON.parse(response);
         console.log(i);*/
-        this.cookieService.set('ID', '12345');
-        console.log(this.cookieService.get('ID'));
-        this.router.navigate(["/display"]);
-     /* });*/
+      this.cookieService.set('ID', '12345');
+      console.log(this.cookieService.get('ID'));
+      this.router.navigate(["/display"]);
+      /* });*/
       //this.http.get("localhost:3000", { responseType: 'text' }).subscribe(res => { });
     }
   }
   onSubmit() {
-    if (this.nom.nativeElement.value && this.prenom.nativeElement.value && this.date.nativeElement.value && this.adresse.nativeElement.value && (this.nationalite.nativeElement.value != "Veuillez choisir un pays") && this.num.nativeElement.value && this.courriel.nativeElement.value && this.motdepasse1.nativeElement.value && this.motdepasse2.nativeElement.value) {
+    if (
+      this.nom.nativeElement.value &&
+      this.prenom.nativeElement.value &&
+      this.date.nativeElement.value &&
+      this.adresse.nativeElement.value &&
+      (this.nationalite.nativeElement.value != "Veuillez choisir un pays") &&
+      this.num.nativeElement.value && this.courriel.nativeElement.value &&
+      this.motdepasse1.nativeElement.value &&
+      this.motdepasse2.nativeElement.value &&
+      (this.motdepasse1.nativeElement.value == this.motdepasse2.nativeElement.value)) {
       var client = new Client(
         this.nom.nativeElement.value,
         this.prenom.nativeElement.value,

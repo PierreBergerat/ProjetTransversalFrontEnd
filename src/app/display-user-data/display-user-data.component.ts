@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-user-data.component.css']
 })
 export class DisplayUserDataComponent implements OnInit {
-
-  constructor() { }
-
+  public j;
+  constructor(private router: Router, private httpClient: HttpClient) { }
   ngOnInit(): void {
   }
-
 }
