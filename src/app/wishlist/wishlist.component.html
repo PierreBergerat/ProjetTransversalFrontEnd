@@ -18,10 +18,14 @@
 <ul style="list-style-type: none;">
     <li *ngFor="let a of j">
         <div class="table-responsive">
-            <table class="table table-dark" style="align-items: center;">
+            <table *ngIf="a.volumeInfo.industryIdentifiers" class="table table-dark" style="align-items: center;">
                 <tr>
-                    <td rowspan="5">
-                        <img *ngIf="a.volumeInfo.imageLinks" [src]=a.volumeInfo.imageLinks.thumbnail>
+                    <td rowspan="5" style="width: 300px; text-align: center;">
+                        <img style="width: 250px; " *ngIf="a.volumeInfo.imageLinks;else pasImage"
+                            [src]=a.volumeInfo.imageLinks.thumbnail>
+                        <ng-template #pasImage>
+                            <img style="width: 250px; text-align: center;" src="assets/missingbook.png" alt="">
+                        </ng-template>
                     </td>
                     <td>
                         <div *ngIf="a.volumeInfo.title; else ng1">
