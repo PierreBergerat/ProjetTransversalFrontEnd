@@ -1,7 +1,7 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Livre } from './../Class/livre';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { ElementRef } from '@angular/core';
