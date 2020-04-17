@@ -1,6 +1,6 @@
 <div class="container">
     <ul style="list-style-type: none;">
-        <li *ngFor="let a of j">
+        <li *ngFor="let a of j.slice().reverse()">
             <div class="table-responsive">
                 <table class="table table-dark" style="align-items: center;">
                     <tr>
@@ -21,8 +21,8 @@
                     </tr>
                     <tr style="vertical-align:top;">
                         <td>
-                            <div *ngIf="a.Prenom && a.Nom; else ng2">
-                                <p>Auteur : {{a.Prenom}} {{a.Nom}}</p>
+                            <div *ngIf="a.Nom_complet; else ng2">
+                                <p>Auteur : {{a.Nom_complet}} {{a.Nom}}</p>
                             </div>
                             <ng-template #ng2>
                                 <p>Auteur : Indisponible</p>
@@ -32,7 +32,7 @@
                     <tr style="vertical-align:top;">
                         <td>
                             <div *ngIf="a.Description; else ng3">
-                                <p>Description : {{a.Description}}</p>
+                                <p style="text-align: justify;">Description : {{a.Description}}</p>
                             </div>
                             <ng-template #ng3>
                                 <p>Description : Indisponible</p>

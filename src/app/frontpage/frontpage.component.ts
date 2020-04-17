@@ -6,12 +6,14 @@ import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 
+
 @Component({
   selector: 'app-frontpage',
   templateUrl: './frontpage.component.html',
   styleUrls: ['./frontpage.component.css'],
 })
 export class FrontpageComponent implements OnInit {
+  private livre_ID: String;
   @ViewChild('titre') titre: ElementRef;
   @ViewChild('auteur') auteur: ElementRef;
   @ViewChild('description') description: ElementRef;
@@ -91,7 +93,7 @@ export class FrontpageComponent implements OnInit {
       console.log("error");
     }
   } ngOnInit(): void {
-    if (this.cookieService.get('ID')) {
+    if (this.cookieService.get('ID_USER')) {
       console.log("Got an ID");
     } else {
       console.log("Alors on est pas co ?");
@@ -122,8 +124,46 @@ export class FrontpageComponent implements OnInit {
       console.log(clientRequete);
       this.httpClient.post('http://localhost:3000/livres', clientRequete, { responseType: 'text' }).subscribe(response => {
         var r = JSON.parse(response);
-        var R_ID = r.id;
+        this.livre_ID = r.id;
+        arrayGenre.forEach(genre => {
+          var request = 'http://localhost:3000/id/genres/' + genre
+          this.httpClient.get(request, { responseType: 'text' }).subscribe(id => {
+            var genre_ID = JSON.parse(id).ID_genre;
+            console.log(genre_ID);
+            var requestGenreLivre = 'http://localhost:3000/genres/livres/' + genre_ID + '/' + this.livre_ID
+            this.httpClient.post(requestGenreLivre, "", { responseType: 'text' }).subscribe(resultat => {
+              var t = JSON.parse(resultat)
+              console.log(t)
+
+            })
+          })
+        })
+        var requeteAuteur = 'http://localhost:3000/verification/auteur/' + this.auteur.nativeElement.value;
+        console.log(requeteAuteur)
+        this.httpClient.get(requeteAuteur, { responseType: 'text' }).subscribe(response => {
+          var auteurvalue = JSON.parse(response)
+          if (auteurvalue.ID_auteur) {
+            var auteurID = auteurvalue.ID_auteur
+            var requeteLivreAuteur = 'http://localhost:3000/auteurs/livres/' + auteurID + '/' + this.livre_ID
+            this.httpClient.post(requeteLivreAuteur, "", { responseType: 'text' }).subscribe(r => {
+              console.log("REPONSE FINALE")
+              console.log(r);
+            })
+          } else {
+            var postAuteur = { "Nom_complet": this.auteur.nativeElement.value }
+            console.log(postAuteur)
+            this.httpClient.post('http://localhost:3000/auteurs', postAuteur, { responseType: 'text' }).subscribe(rep => {
+              var auteurID = JSON.parse(rep).id;
+              var requeteLivreAuteur = 'http://localhost:3000/auteurs/livres/' + auteurID + '/' + this.livre_ID
+              this.httpClient.post(requeteLivreAuteur, "", { responseType: 'text' }).subscribe(r => {
+                console.log("REPONSE FINALE")
+                console.log(r);
+              })
+            });
+          }
+        })
       })
+
     } else {
       console.log("Error please fill all fields");
     }

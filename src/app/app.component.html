@@ -2,19 +2,22 @@
   <a class="navbar-brand" href="/">BookShare</a>
   <ul class="navbar-nav nav ml-auto">
     <li class="nav-item">
-      <a *ngIf="hasCookie(); else connection1" class="nav-link" routerLinkActive="active" routerLink="add">Ajouter un livre</a>
+      <a *ngIf="hasCookie(); else connection1" class="nav-link" routerLinkActive="active" routerLink="add">Ajouter un
+        livre</a>
       <ng-template #connection1>
         <a class="nav-link" routerLinkActive="active" routerLink="register">Ajouter un livre</a>
       </ng-template>
     </li>
     <li class="nav-item">
-      <a *ngIf="hasCookie(); else connection2" class="nav-link" routerLinkActive="active" routerLink="display">Catalogue</a>
+      <a *ngIf="hasCookie(); else connection2" class="nav-link" routerLinkActive="active"
+        routerLink="display">Catalogue</a>
       <ng-template #connection2>
         <a class="nav-link" routerLinkActive="active" routerLink="register">Catalogue</a>
       </ng-template>
     </li>
     <li class="nav-item">
-      <a *ngIf="hasCookie(); else connection3" class="nav-link" routerLinkActive="active" routerLink="wishlist">Liste de souhaits</a>
+      <a *ngIf="hasCookie(); else connection3" class="nav-link" routerLinkActive="active" routerLink="wishlist">Liste de
+        souhaits</a>
       <ng-template #connection3>
         <a class="nav-link" routerLinkActive="active" routerLink="register">Liste de souhaits</a>
       </ng-template>

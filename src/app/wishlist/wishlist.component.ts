@@ -39,7 +39,7 @@ export class WishlistComponent implements OnInit {
 
   test(event: any) {
     var temp = ((((event.target.parentElement).parentElement).parentElement).innerText.split("ISBN : "));
-    var ISBN = temp[temp.length-1]
+    var ISBN = temp[temp.length - 1]
     //requeteGoogleGetLivreInfo
     //requetePostInteretLivre
     console.warn(ISBN);
