@@ -4,8 +4,8 @@
             <div class="table-responsive">
                 <table class="table table-dark" style="align-items: center;">
                     <tr>
-                        <td rowspan="6" style="width: 300px;">
-                            <img src="assets/missingbook.png">
+                        <td rowspan="6" style="width: 300px; text-align: center;">
+                            <img style="width: 200px;" [src]="k[i]">
                         </td>
                         <td>
                             <div *ngIf="a.Titre; else ng1">
@@ -22,7 +22,7 @@
                     <tr style="vertical-align:top;">
                         <td>
                             <div *ngIf="a.Nom_complet; else ng2">
-                                <p>Auteur : {{a.Nom_complet}} {{a.Nom}}</p>
+                                <p>Auteur : {{a.Nom_complet}}</p>
                             </div>
                             <ng-template #ng2>
                                 <p>Auteur : Indisponible</p>
