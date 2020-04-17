@@ -1,6 +1,6 @@
 <div class="container">
     <ul style="list-style-type: none;">
-        <li *ngFor="let a of j.slice().reverse()">
+        <li *ngFor="let a of j.slice().reverse(); let i = index">
             <div class="table-responsive">
                 <table class="table table-dark" style="align-items: center;">
                     <tr>
@@ -52,8 +52,11 @@
                     </tr>
                     <tr style="vertical-align:top;">
                         <td>
-                            <div *ngIf="a.Genre; else ng5">
-                                <p>Genre : {{a.Genre}}</p>
+                            <div>
+                                <p>Genre(s) : </p>
+                                <ul *ngFor="let b of m[i]">
+                                    <li>{{b.Genre}}</li>
+                                </ul>
                             </div>
                             <ng-template #ng5>
                                 <p>Genre : Indisponible</p>
