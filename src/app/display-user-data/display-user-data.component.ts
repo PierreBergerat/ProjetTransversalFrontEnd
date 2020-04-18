@@ -31,6 +31,18 @@ export class DisplayUserDataComponent implements OnInit {
       }
       console.log(this.j)
     })
+    if (this.cookieService.get('justConnected') == '1') {
+      var requete = "http://localhost:3000/livres/interetsPERSONNE/" + this.cookieService.get('ID_USER');
+      this.httpClient.get(requete, { responseType: 'text' }).subscribe(res => {
+        Array.prototype.slice.call(JSON.parse(res)).forEach(elem => {
+          var apiRequest = "http://localhost:3000/livres/disponible/" + elem.ISBN_livre
+          this.httpClient.get(apiRequest, { responseType: 'text' }).subscribe(reponse => {
+            console.log(reponse);
+          })
+        })
+      })
+      this.cookieService.delete('justConnected')
+    }
     //console.log(this.k)
     this.verifCredit();
   }

@@ -61,6 +61,7 @@ export class InputUserDataFormComponent implements OnInit {
           var i = JSON.parse(response);
           if (i.ID_personne) {
             this.cookieService.set('ID_USER', i.ID_personne);
+            this.cookieService.set('justConnected','1');
             console.log(this.cookieService.get('ID_USER'));
             if (this.cookieService.get("FirstCo")) { 
               this.router.navigate(["/interets"])
