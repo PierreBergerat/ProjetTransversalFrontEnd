@@ -13,6 +13,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InputUserDataFormComponent implements OnInit {
   private cookieValue: String;
+
+  @ViewChild('trigger') trigger: ElementRef;
+  @ViewChild('showModal') showModal: ElementRef;
+  @ViewChild('modalTitre') modalTitre: ElementRef;
+  @ViewChild('modalContenu') modalContenu: ElementRef;
+  @ViewChild('modalFermer') modalFermer: ElementRef;
+
   @ViewChild('emailco') emailco: ElementRef;
   @ViewChild('passco') passco: ElementRef;
   @ViewChild('nom') nom: ElementRef;
@@ -31,6 +38,14 @@ export class InputUserDataFormComponent implements OnInit {
     this.checkoutForm = this.formBuilder.group({});
     this.connectForm = this.formBuilder2.group({});
   }
+
+  newModal(titre: String, contenu: String, fermer: String) {
+    this.modalTitre.nativeElement.innerText = titre;
+    this.modalContenu.nativeElement.innerText = contenu;
+    this.modalFermer.nativeElement.innerText = fermer;
+    this.trigger.nativeElement.click();
+  }
+
   ngOnInit(): void {
   }
 
@@ -47,7 +62,11 @@ export class InputUserDataFormComponent implements OnInit {
           if (i.ID_personne) {
             this.cookieService.set('ID_USER', i.ID_personne);
             console.log(this.cookieService.get('ID_USER'));
-            this.router.navigate(["/display"]);
+            if (this.cookieService.get("FirstCo")) { 
+              this.router.navigate(["/interets"])
+            } else {
+              this.router.navigate(["/display"]);
+            }
           } else {
             console.log("Error account do not exist")
           }
@@ -57,6 +76,7 @@ export class InputUserDataFormComponent implements OnInit {
       });
     }
   }
+
   onSubmit() {
     if (
       this.nom.nativeElement.value &&
@@ -106,8 +126,10 @@ export class InputUserDataFormComponent implements OnInit {
                 var i = JSON.parse(response);
                 console.log(i);
                 Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
-                  elem.value = " ";
+                  elem.value = "";
                 })
+                this.cookieService.set('FirstCo', 'True');
+                this.newModal("Succès", "Vous vous êtes correctement enregistré ! Veuillez maintenant vous connecter", "J'ai compris")
               });
             });
         } else {

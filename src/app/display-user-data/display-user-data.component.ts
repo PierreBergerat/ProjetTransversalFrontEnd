@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class DisplayUserDataComponent implements OnInit {
   public m: Array<Array<String>>;
   public k: Array<String>;
   public p: Array<String>;
-  constructor(private router: Router, private httpClient: HttpClient) {
+  constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
     this.j = new Array<String>();
     this.m = new Array<Array<String>>();
     this.k = new Array<String>();
@@ -28,6 +29,22 @@ export class DisplayUserDataComponent implements OnInit {
       }
     })
     console.log(this.k)
+    var requestCredit = "http://localhost:3000/credits/verification/" + this.cookieService.get('ID_USER')
+    this.httpClient.get(requestCredit, { responseType: 'text' }).subscribe(response => {
+      var j = JSON.parse(response);
+      if (j[0].Credits == 0) {
+        console.log("true")
+        Array.prototype.slice.call(document.getElementsByTagName('button')).forEach(elem => {
+          elem.style.display = "none";
+          console.log("t")
+        })
+      } else {
+        Array.prototype.slice.call(document.getElementsByTagName('button')).forEach(elem => {
+          elem.style.display = "";
+        })
+      }
+      console.log(j)
+    })
   }
 
   getImage(ISBN: String, index: number) {

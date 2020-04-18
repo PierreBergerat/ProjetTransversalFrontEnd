@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -14,11 +16,24 @@ export class InteretsComponent implements OnInit {
   public authors: Set<String>;
   public genres: Set<String>;
   genreForm;
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private cookieService: CookieService, private router: Router) {
     this.genreForm = this.formBuilder.group({});
     this.authors = new Set<String>();
     this.genres = new Set<String>();
   }
+
+  ngAfterViewChecked() {
+    Array.prototype.slice.call(document.getElementsByClassName('nav-link')).forEach(elem => {
+      elem.style.display = "none"
+    })
+    Array.prototype.slice.call(document.getElementsByClassName('navbar-brand')).forEach(elem => {
+      elem.href = "/interets"
+    })
+    if (this.cookieService.get("FirstCo")) {
+      this.cookieService.delete("FirstCo")
+    }
+  }
+
   removeAuthor(e: Event) {
     var event = e.currentTarget as HTMLButtonElement;
     this.authors.delete(event.parentElement.innerText.split("\n")[0]);
@@ -26,7 +41,15 @@ export class InteretsComponent implements OnInit {
   rechercheAuteur() {
     if (this.auteur.nativeElement.value) {
       var requestApi = this.requete.concat(this.auteur.nativeElement.value.replace(" ", "+"));
-      this.http.get(requestApi, { responseType: 'text' }).subscribe(res => { var j = JSON.parse(res); this.authors.add(j.items[0].volumeInfo.authors[0].replace(". ", ".")) })
+      this.http.get(requestApi, { responseType: 'text' }).subscribe(res => {
+        var j = JSON.parse(res);
+        if (j.items) {
+          this.authors.add(j.items[0].volumeInfo.authors[0].replace(". ", "."))
+        }
+        else {
+          //ERROR METTRE POPUP
+        }
+      })
     }
   }
   updateCheckedOptions(e: Event) {
@@ -53,11 +76,65 @@ export class InteretsComponent implements OnInit {
      }*/
     if (this.genres.size >= 5 && this.authors.size >= 5) {
       console.log("OK");
-      //requete interet auteur
-      //requete interet livre
-    } else {
+      console.log(this.genres);
+      console.log(this.authors);
+      this.authors.forEach(auteur => {
+        var requeteAuteur = 'http://localhost:3000/verification/auteur/' + auteur;
+        //console.log(requeteAuteur)
+        this.http.get(requeteAuteur, { responseType: 'text' }).subscribe(response => {
+          console.log(response)
+          var auteurvalue = JSON.parse(response)
+          if (auteurvalue.ID_auteur) {
+            var auteurID = auteurvalue.ID_auteur
+            var requeteInteret = "http://localhost:3000/auteurs/interets/" + auteurID + '/' + this.cookieService.get('ID_USER')
+            console.log(requeteInteret)
+            this.http.post(requeteInteret, "", { responseType: 'text' }).subscribe(rep => {
+              console.log(rep);
+            })
+            //AUTEUR EXISTE DEJA
+          } else {
+            //AJOUTER AUTEUR
+            var postAuteur = { "Nom_complet": auteur }
+            //console.log(postAuteur)
+            this.http.post('http://localhost:3000/auteurs', postAuteur, { responseType: 'text' }).subscribe(rep => {
+              var auteurID = JSON.parse(rep).id;
+              console.log(auteurID)
+              var requeteInteret = "http://localhost:3000/auteurs/interets/" + auteurID + '/' + this.cookieService.get('ID_USER')
+              console.log(requeteInteret)
+              this.http.post(requeteInteret, "", { responseType: 'text' }).subscribe(rep => {
+                console.log(rep);
+              })
+              //console.log("REPONSE FINALE")
+              ////console.log(r);
+            })
+          }
+        })
+      })
+      this.genres.forEach(genre => {
+        var request = 'http://localhost:3000/id/genres/' + genre
+        this.http.get(request, { responseType: 'text' }).subscribe(id => {
+          var genre_ID = JSON.parse(id).ID_genre;
+          console.log(genre_ID)
+          var interetGenre = 'http://localhost:3000/genres/interets/' + genre_ID + '/' + this.cookieService.get('ID_USER');
+          this.http.post(interetGenre, "", { responseType: 'text' }).subscribe(response => {
+            console.log(response);
+          })
+        })
+        //requete interet auteur
+        //requete interet genre
+      })
+      Array.prototype.slice.call(document.getElementsByClassName('nav-link')).forEach(elem => {
+        elem.style.display = ""
+      })
+      Array.prototype.slice.call(document.getElementsByClassName('navbar-brand')).forEach(elem => {
+        elem.href = "/"
+      })
+      this.router.navigate(["/display"])
+    }
+    else {
       console.log("Pas ok");
     }
-  }
 
+
+  }
 }
