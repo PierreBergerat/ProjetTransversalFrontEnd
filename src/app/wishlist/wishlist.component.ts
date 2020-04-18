@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -15,9 +16,14 @@ export class WishlistComponent implements OnInit {
   isbn = "isbn:"
   public j: any[];
   @ViewChild('request') request: ElementRef;
-  constructor(private formBuilder: FormBuilder, private router: Router, private httpClient: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private httpClient: HttpClient, private cookieService : CookieService) {
     this.checkoutForm = this.formBuilder.group({});
   }
+
+gotoListSouhait(){
+  this.router.navigate[('/wishlistpersonnal')]
+}
+
   onSubmit() {
     if (this.request) {
       if (this.request.nativeElement.value.match(/^[0-9-]*$/) != null) {
@@ -43,6 +49,10 @@ export class WishlistComponent implements OnInit {
     //requeteGoogleGetLivreInfo
     //requetePostInteretLivre
     console.warn(ISBN);
+    var requeteAjoutInteret = "http://localhost:3000/livres/interets/" + ISBN + '/' + this.cookieService.get('ID_USER')
+    this.httpClient.post(requeteAjoutInteret, "", {responseType : 'text'}).subscribe(res => {
+      console.log(res)
+    })
   }
   ngOnInit(): void {
   }

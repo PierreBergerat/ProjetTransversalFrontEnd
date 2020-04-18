@@ -1,27 +1,3 @@
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-    <div class="container">
-        <div class="row">
-            <h1 class="col-md-6">Liste de souhaits</h1>
-            <a class="col-md-6 float-right pull-right" style="text-align: right;" [routerLink]="['/wishlistpersonnal']"
-                routerLinkActive="router-link-active">Voir ma
-                liste de souhaits</a>
-        </div>
-    </div>
-    <div class="form-group required ">
-        <label class="col-md-12 control-label">ISBN ou titre</label>
-        <div class="col-md-12 ">
-            <input #request class="form-control" id="pseudo" maxlength="256" name="pseudo"
-                placeholder="Ex : Les pilliers de la Terre" required="required" title="" type="text" />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-star"></span> Rechercher
-            </button>
-        </div>
-    </div>
-</form>
 <ul style="list-style-type: none;">
     <li *ngFor="let a of j">
         <div class="table-responsive">
@@ -43,7 +19,7 @@
                         </ng-template>
                     </td>
                     <td>
-                        <button class="btn btn-primary" (click)="test($event)">Je&nbsp;le&nbsp;veux&nbsp;!</button>
+                        <button class="btn btn-primary" (click)="delete($event)">Supprimer</button>
                     </td>
                 </tr>
                 <tr style="vertical-align:top;">

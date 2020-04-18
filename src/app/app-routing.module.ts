@@ -1,3 +1,4 @@
+import { PersonnalWishlistComponent } from './personnal-wishlist/personnal-wishlist.component';
 import { InteretsComponent } from './interets/interets.component';
 import { RecommandationsComponent } from './recommandations/recommandations.component';
 import { PagedaccueilComponent } from './pagedaccueil/pagedaccueil.component';
@@ -28,6 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'interets', component: InteretsComponent
+  }, {
+    path: 'wishlistpersonnal', component: PersonnalWishlistComponent
   }
 ];
 
