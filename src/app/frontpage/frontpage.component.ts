@@ -14,6 +14,13 @@ import { ElementRef } from '@angular/core';
 })
 export class FrontpageComponent implements OnInit {
   private livre_ID: String;
+
+  @ViewChild('trigger') trigger: ElementRef;
+  @ViewChild('showModal') showModal: ElementRef;
+  @ViewChild('modalTitre') modalTitre: ElementRef;
+  @ViewChild('modalContenu') modalContenu: ElementRef;
+  @ViewChild('modalFermer') modalFermer: ElementRef;
+
   @ViewChild('titre') titre: ElementRef;
   @ViewChild('auteur') auteur: ElementRef;
   @ViewChild('description') description: ElementRef;
@@ -33,12 +40,21 @@ export class FrontpageComponent implements OnInit {
     this.checkoutForm = this.formBuilder.group({});
   }
   onKey(event) { this.request = event.target.value; }
+
+
+  newModal(titre: String, contenu: String, fermer: String) {
+    this.modalTitre.nativeElement.innerText = titre;
+    this.modalContenu.nativeElement.innerText = contenu;
+    this.modalFermer.nativeElement.innerText = fermer;
+    this.trigger.nativeElement.click()
+  }
+
+
   onClickMe() {
     if (this.request) {
       this.request = this.request.replace('-', '');
       var requestApi = this.api.concat(this.request)
       this.httpClient.get(requestApi, { responseType: 'text' }).subscribe(res => {
-        this.error.nativeElement.style.display = "none";
         this.titre.nativeElement.disabled = true;
         this.auteur.nativeElement.disabled = true;
         this.description.nativeElement.disabled = true;
@@ -76,8 +92,7 @@ export class FrontpageComponent implements OnInit {
           } else { this.langue.nativeElement.disabled = false; }
           this.valider.nativeElement.disabled = false;
         } else {
-          this.error.nativeElement.style.display = "";
-          this.ancre.nativeElement.scrollIntoView();
+          this.newModal("ISBN INCONNU", "L'ISBN que vous avez entré n'est pas reconnu par nos services, veuillez s'il vous plait compléter les informations vous-même.", "J'ai compris")
           this.titre.nativeElement.disabled = false;
           this.auteur.nativeElement.disabled = false;
           this.description.nativeElement.disabled = false;
@@ -160,6 +175,10 @@ export class FrontpageComponent implements OnInit {
                 ////console.log(r);
                 var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + Number(this.cookieService.get("ID_USER"))
                 this.httpClient.post(creditUtilisateur, "", { responseType: 'text' }).subscribe(e => {
+                  this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer");
+                  Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
+                    elem.value = "";
+                  })
                   console.log(e);
                 })
               })
@@ -169,6 +188,7 @@ export class FrontpageComponent implements OnInit {
       })
 
     } else {
+      this.newModal("Champs manquants", "Veuillez s'il vous plaît compléter tous les champs avant d'envoyer votre requête.", "J'ai compris")
       //console.log("Error please fill all fields");
     }
     this.router.navigate(['/add']);

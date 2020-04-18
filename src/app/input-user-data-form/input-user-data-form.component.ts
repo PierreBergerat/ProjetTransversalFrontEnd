@@ -105,7 +105,9 @@ export class InputUserDataFormComponent implements OnInit {
               this.http.post('http://localhost:3000/clients', personne2, { responseType: 'text' }).subscribe(response => {
                 var i = JSON.parse(response);
                 console.log(i);
-                this.router.navigate(["/register"]);
+                Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
+                  elem.value = " ";
+                })
               });
             });
         } else {

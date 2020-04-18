@@ -1,7 +1,25 @@
-<a #anchor href="#alert"></a>
-<div #error class="alert alert-danger" style="display:none;">
-    <strong>ISBN INCONNU !</strong> Veuillez entrer les informations vous même. Navré de ce désagrément.
+<!--MODALDEBUT-->
+<div>
+    <a #trigger data-toggle="modal" href="#showModal" style="visibility: none;"></a>
+    <div #showModal id='showModal' class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" #modalTitre></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p #modalContenu></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" #modalFermer></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+<!--MODALFIN-->
 <h1>&nbsp;Ajouter un livre</h1>
 <div class="form-group">
     <label class="col-md-2 control-label">ISBN</label>
