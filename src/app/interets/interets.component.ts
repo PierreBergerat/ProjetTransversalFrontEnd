@@ -34,6 +34,7 @@ export class InteretsComponent implements OnInit {
     }
   }
 
+
   removeAuthor(e: Event) {
     var event = e.currentTarget as HTMLButtonElement;
     this.authors.delete(event.parentElement.innerText.split("\n")[0]);
