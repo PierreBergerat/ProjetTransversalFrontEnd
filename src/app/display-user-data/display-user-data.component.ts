@@ -56,7 +56,7 @@ export class DisplayUserDataComponent implements OnInit {
 
   getImage(ISBN: String, index: number) {
     //console.log(ISBN)
-    var r = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN
+    var r = "https://www.googleapis.com/books/v1/volumes?q=isbn%3D" + ISBN
     this.httpClient.get(r, { responseType: 'text' }).subscribe(reponse => {
       var json = JSON.parse(reponse);
       if (json.items) {

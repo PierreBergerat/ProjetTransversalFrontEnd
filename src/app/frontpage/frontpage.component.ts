@@ -33,7 +33,7 @@ export class FrontpageComponent implements OnInit {
   @ViewChild('error') error: ElementRef;
   @ViewChild('anchor') ancre: ElementRef;
   @ViewChild('miniature') miniature: ElementRef;
-  api = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
+  api = "https://www.googleapis.com/books/v1/volumes?q=isbn%3D";
   request = "";
   checkoutForm;
   constructor(private httpClient: HttpClient, private router: Router, private formBuilder: FormBuilder, private cookieService: CookieService) {

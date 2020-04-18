@@ -13,16 +13,16 @@ import { ViewChild, ElementRef } from '@angular/core';
 export class WishlistComponent implements OnInit {
   checkoutForm;
   api = "https://www.googleapis.com/books/v1/volumes?q=";
-  isbn = "isbn:"
+  isbn = "isbn%3D"
   public j: any[];
   @ViewChild('request') request: ElementRef;
-  constructor(private formBuilder: FormBuilder, private router: Router, private httpClient: HttpClient, private cookieService : CookieService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
     this.checkoutForm = this.formBuilder.group({});
   }
 
-gotoListSouhait(){
-  this.router.navigate[('/wishlistpersonnal')]
-}
+  gotoListSouhait() {
+    this.router.navigate[('/wishlistpersonnal')]
+  }
 
   onSubmit() {
     if (this.request) {
@@ -44,17 +44,20 @@ gotoListSouhait(){
   }
 
   test(event: any) {
+    
     var temp = ((((event.target.parentElement).parentElement).parentElement).innerText.split("ISBN : "));
     var ISBN = temp[temp.length - 1]
     //requeteGoogleGetLivreInfo
     //requetePostInteretLivre
     console.warn(ISBN);
     var requeteAjoutInteret = "http://localhost:3000/livres/interets/" + ISBN + '/' + this.cookieService.get('ID_USER')
-    this.httpClient.post(requeteAjoutInteret, "", {responseType : 'text'}).subscribe(res => {
+    this.httpClient.post(requeteAjoutInteret, "", { responseType: 'text' }).subscribe(res => {
       console.log(res)
-    })
+    });
+    (event.currentTarget as HTMLButtonElement).remove()
   }
   ngOnInit(): void {
+
   }
 
 }
