@@ -173,7 +173,7 @@ export class FrontpageComponent implements OnInit {
               this.httpClient.post(requeteLivreAuteur, "", { responseType: 'text' }).subscribe(r => {
                 //console.log("REPONSE FINALE")
                 ////console.log(r);
-                var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + Number(this.cookieService.get("ID_USER"))
+                var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + this.cookieService.get("ID_USER")
                 this.httpClient.post(creditUtilisateur, "", { responseType: 'text' }).subscribe(e => {
                   this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer");
                   Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
