@@ -63,6 +63,7 @@ export class InputUserDataFormComponent implements OnInit {
             this.cookieService.set('ID_USER', i.ID_personne);
             this.cookieService.set('justConnected','1');
             console.log(this.cookieService.get('ID_USER'));
+            console.log(this.cookieService.get('justConnected'));
             if (this.cookieService.get("FirstCo")) { 
               this.router.navigate(["/interets"])
             } else {

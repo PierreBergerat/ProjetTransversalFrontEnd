@@ -1,7 +1,7 @@
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-display-user-data',
@@ -9,18 +9,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display-user-data.component.css']
 })
 export class DisplayUserDataComponent implements OnInit {
+
+  @ViewChild('trigger') trigger: ElementRef;
+  @ViewChild('showModal') showModal: ElementRef;
+  @ViewChild('modalTitre') modalTitre: ElementRef;
+  @ViewChild('modalContenu') modalContenu: ElementRef;
+  @ViewChild('modalFermer') modalFermer: ElementRef;
+
   public j: Array<String>;
   public m: Array<Array<String>>;
   public k: Array<String>;
   public p: Array<String>;
+  public livresNotifs: Set<String>
+  public livreDispoTitres: Array<String>
   public rest;
   constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
     this.j = new Array<String>();
     this.m = new Array<Array<String>>();
     this.k = new Array<String>();
     this.p = new Array<String>();
+    this.livresNotifs = new Set<String>();
+    this.livreDispoTitres = new Array<String>()
   }
-  ngOnInit(): void {
+
+  newModal(titre: String, contenu: String, fermer: String) {
+    this.modalTitre.nativeElement.innerText = titre;
+    this.modalContenu.nativeElement.innerText = contenu;
+    this.modalFermer.nativeElement.innerText = fermer;
+    this.trigger.nativeElement.click()
+  }
+  ngOnInit() { }
+  ngAfterViewInit() {
+    var c = 0;
     this.httpClient.get("http://localhost:3000/livres", { responseType: 'json' }).subscribe(res => {
       this.j = res as Array<String>;
       this.rest = res;
@@ -30,21 +50,40 @@ export class DisplayUserDataComponent implements OnInit {
         this.getAuteur(res[i].ID_Livre, i)
       }
       console.log(this.j)
-    })
-    if (this.cookieService.get('justConnected') == '1') {
-      var requete = "http://localhost:3000/livres/interetsPERSONNE/" + this.cookieService.get('ID_USER');
-      this.httpClient.get(requete, { responseType: 'text' }).subscribe(res => {
-        Array.prototype.slice.call(JSON.parse(res)).forEach(elem => {
-          var apiRequest = "http://localhost:3000/livres/disponible/" + elem.ISBN_livre
-          this.httpClient.get(apiRequest, { responseType: 'text' }).subscribe(reponse => {
-            console.log(reponse);
+      if (this.cookieService.get('justConnected') == '1') {
+        console.log("TRUE")
+        var requete = "http://localhost:3000/livres/interetsPERSONNE/" + this.cookieService.get('ID_USER');
+        this.httpClient.get(requete, { responseType: 'text' }).subscribe(response => {
+          console.log(response)
+          if (res == '[]') { console.log("Pas de notifs") }
+          Array.prototype.slice.call(JSON.parse(response)).forEach(elem => {
+            console.log("cc")
+            var apiRequest = "http://localhost:3000/livres/disponible/" + elem.ISBN_livre
+            this.httpClient.get(apiRequest, { responseType: 'text' }).subscribe(reponse => {
+              this.livresNotifs.add(JSON.parse(reponse)[0].ID_livre)
+              c++;
+              if (c == JSON.parse(response).length) {
+                console.log("Fin ?")
+                this.livresNotifs.forEach(id => {
+                  for (var i = 0; i < this.j.length; i++) {
+                    if (res[i].ID_Livre == id) {
+                      this.livreDispoTitres.push(res[i].Titre)
+                    }
+                  }
+                })
+                console.log(this.livreDispoTitres)
+                this.modalTitre.nativeElement.innerText = "Nouveaux livres disponibles parmi votre liste de souhaits !";
+                this.modalFermer.nativeElement.innerText = "J'ai compris !";
+                this.trigger.nativeElement.click()
+              }
+            })
           })
         })
-      })
-      this.cookieService.delete('justConnected')
-    }
-    //console.log(this.k)
-    this.verifCredit();
+        this.cookieService.delete('justConnected')
+      }
+      //console.log(this.k)
+      this.verifCredit();
+    })
   }
 
   verifCredit() {

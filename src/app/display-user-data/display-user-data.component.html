@@ -1,3 +1,25 @@
+<!--MODALDEBUT-->
+<div>
+    <a #trigger data-toggle="modal" href="#showModal" style="visibility: none;"></a>
+    <div #showModal id='showModal' class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" #modalTitre></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div *ngFor="let item of livreDispoTitres" class="modal-body">
+                    <p style="text-align: justify;" #modalContenu>{{item}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" #modalFermer></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--MODALFIN-->
 <div class="container">
     <ul style="list-style-type: none;">
         <li *ngFor="let a of j.slice().reverse(); let i = index">
@@ -16,8 +38,10 @@
                             </ng-template>
                         </td>
                         <td style="text-align: right;">
-                            <button class="btn btn-primary clickable" (click)="takeLivre($event)">Je&nbsp;le&nbsp;veux&nbsp;!</button>
-                            <button class="btn btn-primary" style="visibility: hidden;">Je&nbsp;le&nbsp;veux&nbsp;!</button>
+                            <button class="btn btn-primary clickable"
+                                (click)="takeLivre($event)">Je&nbsp;le&nbsp;veux&nbsp;!</button>
+                            <button class="btn btn-primary"
+                                style="visibility: hidden;">Je&nbsp;le&nbsp;veux&nbsp;!</button>
                         </td>
                     </tr>
                     <tr style="vertical-align:top;">
