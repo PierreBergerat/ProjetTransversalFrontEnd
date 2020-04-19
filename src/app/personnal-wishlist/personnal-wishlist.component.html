@@ -20,67 +20,74 @@
     </div>
 </div>
 <!--MODALFIN-->
-<ul style="list-style-type: none;">
-    <li *ngFor="let a of j">
-        <div class="table-responsive">
-            <table *ngIf="a.volumeInfo.industryIdentifiers" class="table table-dark" style="align-items: center;">
-                <tr>
-                    <td rowspan="5" style="width: 300px; text-align: center;">
-                        <img style="width: 250px; " *ngIf="a.volumeInfo.imageLinks;else pasImage"
-                            [src]=a.volumeInfo.imageLinks.thumbnail>
-                        <ng-template #pasImage>
-                            <img style="width: 250px; text-align: center;" src="assets/missingbook.png" alt="">
-                        </ng-template>
-                    </td>
-                    <td>
-                        <div *ngIf="a.volumeInfo.title; else ng1">
-                            <h3>Titre : {{a.volumeInfo.title}}</h3>
-                        </div>
-                        <ng-template #ng1>
-                            <h3>Titre : Indisponible</h3>
-                        </ng-template>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" (click)="delete($event)">Supprimer</button>
-                    </td>
-                </tr>
-                <tr style="vertical-align:top;">
-                    <td>
-                        <div *ngIf="a.volumeInfo.authors; else ng2">
-                            <p>Auteur : {{a.volumeInfo.authors[0]}}</p>
-                        </div>
-                        <ng-template #ng2>
-                            <p>Auteur : Indisponible</p>
-                        </ng-template>
-                    </td>
-                </tr>
-                <tr style="vertical-align:top;">
-                    <td>
-                        <div *ngIf="a.volumeInfo.description; else ng3">
-                            <p>Description : {{a.volumeInfo.description}}</p>
-                        </div>
-                        <ng-template #ng3>
-                            <p>Description : Indisponible</p>
-                        </ng-template>
-                    </td>
-                </tr>
-                <tr style="vertical-align:top;">
+<div class="container">
+    <div class="jumbotron text-left">
+        <h1>Ma liste de souhaits</h1>
+        <h3 style="text-align: justify;">Retrouvez ici les livres pour lesquels vous avez marqué un intérêt
+        </h3>
+    </div>
+    <ul style="list-style-type: none;">
+        <li *ngFor="let a of j">
+            <div class="table-responsive">
+                <table *ngIf="a.volumeInfo.industryIdentifiers" class="table table-dark" style="align-items: center;">
+                    <tr>
+                        <td rowspan="5" style="width: 300px; text-align: center;">
+                            <img style="width: 250px; " *ngIf="a.volumeInfo.imageLinks;else pasImage"
+                                [src]=a.volumeInfo.imageLinks.thumbnail>
+                            <ng-template #pasImage>
+                                <img style="width: 250px; text-align: center;" src="assets/missingbook.png" alt="">
+                            </ng-template>
+                        </td>
+                        <td>
+                            <div *ngIf="a.volumeInfo.title; else ng1">
+                                <h3>Titre : {{a.volumeInfo.title}}</h3>
+                            </div>
+                            <ng-template #ng1>
+                                <h3>Titre : Indisponible</h3>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" (click)="delete($event)">Supprimer</button>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align:top;">
+                        <td>
+                            <div *ngIf="a.volumeInfo.authors; else ng2">
+                                <p>Auteur : {{a.volumeInfo.authors[0]}}</p>
+                            </div>
+                            <ng-template #ng2>
+                                <p>Auteur : Indisponible</p>
+                            </ng-template>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align:top;">
+                        <td>
+                            <div *ngIf="a.volumeInfo.description; else ng3">
+                                <p>Description : {{a.volumeInfo.description}}</p>
+                            </div>
+                            <ng-template #ng3>
+                                <p>Description : Indisponible</p>
+                            </ng-template>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align:top;">
 
-                    <td>
-                        <div *ngIf="a.volumeInfo.publisher; else ng4">
-                            <p>Editeur : {{a.volumeInfo.publisher}}</p>
-                        </div>
-                        <ng-template #ng4>
-                            <p>Editeur : Indisponible</p>
-                        </ng-template>
-                    </td>
-                </tr>
-                <tr style="vertical-align:top;">
-                    <td>
-                        <p>ISBN : {{a.volumeInfo.industryIdentifiers[0].identifier}}</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </li>
-</ul>
+                        <td>
+                            <div *ngIf="a.volumeInfo.publisher; else ng4">
+                                <p>Editeur : {{a.volumeInfo.publisher}}</p>
+                            </div>
+                            <ng-template #ng4>
+                                <p>Editeur : Indisponible</p>
+                            </ng-template>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align:top;">
+                        <td>
+                            <p>ISBN : {{a.volumeInfo.industryIdentifiers[0].identifier}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </li>
+    </ul>
+</div>

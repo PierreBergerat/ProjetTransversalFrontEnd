@@ -21,7 +21,11 @@
 </div>
 <!--MODALFIN-->
 <div class="container">
-    <ul style="list-style-type: none;">
+    <div class="jumbotron text-left">
+        <h1>Catalogue</h1>
+        <h3>Vous trouverez ici tous les livres disponibles sur notre plateforme</h3>
+    </div>
+    <ul style="list-style-type: none; padding:0;">
         <li *ngFor="let a of j.slice().reverse(); let i = index">
             <div class="table-responsive">
                 <table class="table table-dark" style="align-items: center;">

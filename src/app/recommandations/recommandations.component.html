@@ -21,59 +21,65 @@
         </div>
     </div>
     <!--MODALFIN-->
-    <ul style="list-style-type: none;">
-        <li *ngFor="let a of j; let in = index;">
-            <div class="table-responsive">
-                <table class="table table-dark" style="align-items: center;">
-                    <tr>
-                        
-                        <td>
-                            <div *ngIf="a.Titre; else ng1">
-                                <h3>Titre : {{a.Titre}}</h3>
-                            </div>
-                            <ng-template #ng1>
-                                <h3>Titre : Indisponible</h3>
-                            </ng-template>
-                        </td>
-                        <td style="text-align: right;">
-                            <button class="btn btn-primary clickable"
-                                (click)="takeLivre($event)">Je&nbsp;le&nbsp;veux&nbsp;!</button>
-                            <button class="btn btn-primary"
-                                style="visibility: hidden;">Je&nbsp;le&nbsp;veux&nbsp;!</button>
-                        </td>
-                    </tr>
-                    <tr style="vertical-align:top;">
-                        <td>
-                            <div *ngIf="a.Description; else ng2">
-                                <p>Description : {{a.Description}}</p>
-                            </div>
-                            <ng-template #ng2>
-                                <p>Description : Indisponible</p>
-                            </ng-template>
-                        </td>
-                    </tr>
-                    <tr style="vertical-align:top;">
-                        <td>
-                            <div *ngIf="a.Editeur; else ng3">
-                                <p>Editeur : {{a.Editeur}}</p>
-                            </div>
-                            <ng-template #ng3>
-                                <p>Editeur : Indisponible</p>
-                            </ng-template>
-                        </td>
-                    </tr>
-                    <tr style="vertical-align:top;">
-                        <td>
-                            <div *ngIf="a.ISBN; else ng4">
-                                <p>ISBN : {{a.ISBN}}</p>
-                            </div>
-                            <ng-template #ng4>
-                                <p>ISBN : Indisponible</p>
-                            </ng-template>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </li>
-    </ul>
+    <div class="container">
+        <div class="jumbotron text-left">
+            <h1>Recommandations</h1>
+            <h3 style="text-align: justify;">Vous trouverez ici une liste de livres disponibles basée sur vos intêrets !</h3>
+        </div>
+        <ul style="list-style-type: none; padding:0">
+            <li *ngFor="let a of j; let in = index;">
+                <div class="table-responsive">
+                    <table class="table table-dark" style="align-items: center;">
+                        <tr>
+
+                            <td>
+                                <div *ngIf="a.Titre; else ng1">
+                                    <h3>Titre : {{a.Titre}}</h3>
+                                </div>
+                                <ng-template #ng1>
+                                    <h3>Titre : Indisponible</h3>
+                                </ng-template>
+                            </td>
+                            <td style="text-align: right;">
+                                <button class="btn btn-primary clickable"
+                                    (click)="takeLivre($event)">Je&nbsp;le&nbsp;veux&nbsp;!</button>
+                                <button class="btn btn-primary"
+                                    style="visibility: hidden;">Je&nbsp;le&nbsp;veux&nbsp;!</button>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align:top;">
+                            <td>
+                                <div *ngIf="a.Description; else ng2">
+                                    <p>Description : {{a.Description}}</p>
+                                </div>
+                                <ng-template #ng2>
+                                    <p>Description : Indisponible</p>
+                                </ng-template>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align:top;">
+                            <td>
+                                <div *ngIf="a.Editeur; else ng3">
+                                    <p>Editeur : {{a.Editeur}}</p>
+                                </div>
+                                <ng-template #ng3>
+                                    <p>Editeur : Indisponible</p>
+                                </ng-template>
+                            </td>
+                        </tr>
+                        <tr style="vertical-align:top;">
+                            <td>
+                                <div *ngIf="a.ISBN; else ng4">
+                                    <p>ISBN : {{a.ISBN}}</p>
+                                </div>
+                                <ng-template #ng4>
+                                    <p>ISBN : Indisponible</p>
+                                </ng-template>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
