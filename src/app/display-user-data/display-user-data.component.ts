@@ -49,18 +49,21 @@ export class DisplayUserDataComponent implements OnInit {
         this.getGenre(res[i].ID_Livre, i)
         this.getAuteur(res[i].ID_Livre, i)
       }
-      console.log(this.j)
+      //console.log(this.j)
       if (this.cookieService.get('justConnected') == '1') {
         //console.log("TRUE")
         var requete = "http://localhost:3000/livres/interetsPERSONNE/" + this.cookieService.get('ID_USER');
         this.httpClient.get(requete, { responseType: 'text' }).subscribe(response => {
           //console.log(response)
-          if (res == '[]') { console.log("Pas de notifs") }
+          if (res == '[]') { //console.log("Pas de notifs")
+          }
           Array.prototype.slice.call(JSON.parse(response)).forEach(elem => {
             //console.log("cc")
             var apiRequest = "http://localhost:3000/livres/disponible/" + elem.ISBN_livre
             this.httpClient.get(apiRequest, { responseType: 'text' }).subscribe(reponse => {
-              this.livresNotifs.add(JSON.parse(reponse)[0].ID_livre)
+              if (JSON.parse(reponse)[0]) {
+                this.livresNotifs.add(JSON.parse(reponse)[0].ID_livre)
+              }
               c++;
               if (c == JSON.parse(response).length) {
                 //console.log("Fin ?")
@@ -71,12 +74,13 @@ export class DisplayUserDataComponent implements OnInit {
                     }
                   }
                 })
-                console.log(this.livreDispoTitres)
+                //console.log(this.livreDispoTitres)
                 this.modalTitre.nativeElement.innerText = "Nouveaux livres disponibles parmi votre liste de souhaits !";
                 this.modalFermer.nativeElement.innerText = "J'ai compris !";
                 this.trigger.nativeElement.click()
               }
-            })
+            }
+            )
           })
         })
         this.cookieService.delete('justConnected')

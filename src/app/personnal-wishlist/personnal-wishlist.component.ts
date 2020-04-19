@@ -45,13 +45,15 @@ export class PersonnalWishlistComponent implements OnInit {
           if (JSON.parse(resultats).items) {
             this.j[i] = JSON.parse(resultats).items[0]
             i++;
-          } else { console.log("probleme de get") }
+          } else { //console.log("probleme de get")
+          }
         })
       })
-      console.log(res)
-    if(res == "[]"){
-      this.newModal(":(","Vous n'avez pas encore de livres dans votre liste de souhaits. Cependant, vous pouvez en ajouter dans la page \"Liste de souhaits\" En entrant un ISBN ou un nom","J'ai compris")
-    }})
+      //console.log(res)
+      if (res == "[]") {
+        this.newModal(":(", "Vous n'avez pas encore de livres dans votre liste de souhaits. Cependant, vous pouvez en ajouter dans la page \"Liste de souhaits\" En entrant un ISBN ou un nom", "J'ai compris")
+      }
+    })
   }
 
 
@@ -60,7 +62,6 @@ export class PersonnalWishlistComponent implements OnInit {
     this.httpClient.delete(destroyRequest).subscribe(res => {
       //console.log(res)
     });
-    (e.currentTarget as HTMLButtonElement).parentElement.parentElement.parentElement.remove()
-
+    (e.currentTarget as HTMLButtonElement).parentElement.parentElement.parentElement.remove();
   }
 }
