@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RecommandationsComponent implements OnInit {
   public j: Set<any>;
-  public i: any[];
+  public set: Set<any>;
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('showModal') showModal: ElementRef;
   @ViewChild('modalTitre') modalTitre: ElementRef;
@@ -18,7 +18,7 @@ export class RecommandationsComponent implements OnInit {
   @ViewChild('modalFermer') modalFermer: ElementRef;
   constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
     this.j = new Set<any>();
-    this.i = new Array<any>();
+    this.set = new Set<any>();
   }
 
   ngOnInit(): void {
@@ -27,17 +27,28 @@ export class RecommandationsComponent implements OnInit {
     var requeteGenre = "http://localhost:3000/livres/recommandations/listeGENRES/" + this.cookieService.get('ID_USER')
     this.httpClient.get(requeteBoth).subscribe(resBoth => {
       Array.prototype.slice.call(resBoth).forEach(element => {
-        this.j.add(element)
+        if (!this.set.has(element.ID_Livre)) {
+          this.set.add(element.ID_Livre)
+          this.j.add(element)
+        }
       });
       this.httpClient.get(requeteAuteur).subscribe(resAuteur => {
         Array.prototype.slice.call(resAuteur).forEach(element => {
-          this.j.add(element)
+          if (!this.set.has(element.ID_Livre)) {
+            this.set.add(element.ID_Livre)
+            this.j.add(element)
+          }
         });
         this.httpClient.get(requeteGenre).subscribe(resGenre => {
           Array.prototype.slice.call(resGenre).forEach(element => {
-            this.j.add(element)
-            this.verifCredit()
+            if (!this.set.has(element.ID_Livre)) {
+              this.set.add(element.ID_Livre)
+              this.j.add(element)
+            }
           });
+          console.log(this.set)
+          console.log(this.j)
+          this.verifCredit()
         })
       })
     })
