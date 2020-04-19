@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./recommandations.component.css']
 })
 export class RecommandationsComponent implements OnInit {
-  public j: any[];
+  public j: Set<any>;
   public i: any[];
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('showModal') showModal: ElementRef;
@@ -17,7 +17,7 @@ export class RecommandationsComponent implements OnInit {
   @ViewChild('modalContenu') modalContenu: ElementRef;
   @ViewChild('modalFermer') modalFermer: ElementRef;
   constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
-    this.j = new Array<any>();
+    this.j = new Set<any>();
     this.i = new Array<any>();
   }
 
@@ -27,15 +27,15 @@ export class RecommandationsComponent implements OnInit {
     var requeteGenre = "http://localhost:3000/livres/recommandations/listeGENRES/" + this.cookieService.get('ID_USER')
     this.httpClient.get(requeteBoth).subscribe(resBoth => {
       Array.prototype.slice.call(resBoth).forEach(element => {
-        this.j.push(element)
+        this.j.add(element)
       });
       this.httpClient.get(requeteAuteur).subscribe(resAuteur => {
         Array.prototype.slice.call(resAuteur).forEach(element => {
-          this.j.push(element)
+          this.j.add(element)
         });
         this.httpClient.get(requeteGenre).subscribe(resGenre => {
           Array.prototype.slice.call(resGenre).forEach(element => {
-            this.j.push(element)
+            this.j.add(element)
             this.verifCredit()
           });
         })
@@ -65,16 +65,16 @@ export class RecommandationsComponent implements OnInit {
         Array.prototype.slice.call(document.getElementsByClassName('clickable')).forEach(elem => {
           elem.style.display = "";
         })
-        console.log("assez de crédit")
+        //console.log("assez de crédit")
       }
     })
   }
   takeLivre(e: Event) {
 
     var ISBN = (e.currentTarget as HTMLButtonElement).parentElement.parentElement.parentElement.innerHTML.split("ISBN : ")[1].split('<')[0];
-    console.log(ISBN);
+    //console.log(ISBN);
     (e.currentTarget as HTMLButtonElement).remove();
-    for (var i = 0; i < this.j.length; i++) {
+    for (var i = 0; i < this.j.size; i++) {
       if (this.j[i].ISBN == ISBN) {
         var ID_LIVRE = this.j[i].ID_Livre;
         var requetePrendreLivre = "http://localhost:3000/livres/prendre/" + ID_LIVRE + '/' + this.cookieService.get('ID_USER')
@@ -82,7 +82,7 @@ export class RecommandationsComponent implements OnInit {
           var retirerCredit = "http://localhost:3000/credits/enlever/" + this.cookieService.get('ID_USER');
           this.httpClient.post(retirerCredit, "", { responseType: 'text' }).subscribe(r => {
             this.verifCredit();
-            console.log(r)
+            //console.log(r)
           })
         })
       }

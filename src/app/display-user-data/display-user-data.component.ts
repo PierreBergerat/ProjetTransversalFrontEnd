@@ -51,19 +51,19 @@ export class DisplayUserDataComponent implements OnInit {
       }
       console.log(this.j)
       if (this.cookieService.get('justConnected') == '1') {
-        console.log("TRUE")
+        //console.log("TRUE")
         var requete = "http://localhost:3000/livres/interetsPERSONNE/" + this.cookieService.get('ID_USER');
         this.httpClient.get(requete, { responseType: 'text' }).subscribe(response => {
-          console.log(response)
+          //console.log(response)
           if (res == '[]') { console.log("Pas de notifs") }
           Array.prototype.slice.call(JSON.parse(response)).forEach(elem => {
-            console.log("cc")
+            //console.log("cc")
             var apiRequest = "http://localhost:3000/livres/disponible/" + elem.ISBN_livre
             this.httpClient.get(apiRequest, { responseType: 'text' }).subscribe(reponse => {
               this.livresNotifs.add(JSON.parse(reponse)[0].ID_livre)
               c++;
               if (c == JSON.parse(response).length) {
-                console.log("Fin ?")
+                //console.log("Fin ?")
                 this.livresNotifs.forEach(id => {
                   for (var i = 0; i < this.j.length; i++) {
                     if (res[i].ID_Livre == id) {
@@ -99,7 +99,7 @@ export class DisplayUserDataComponent implements OnInit {
         Array.prototype.slice.call(document.getElementsByClassName('clickable')).forEach(elem => {
           elem.style.display = "";
         })
-        console.log("assez de crédit")
+        //console.log("assez de crédit")
       }
 
     })
@@ -148,7 +148,7 @@ export class DisplayUserDataComponent implements OnInit {
           var retirerCredit = "http://localhost:3000/credits/enlever/" + this.cookieService.get('ID_USER');
           this.httpClient.post(retirerCredit, "", { responseType: 'text' }).subscribe(r => {
             this.verifCredit();
-            console.log(r)
+            //console.log(r)
           })
         })
       }

@@ -29,13 +29,13 @@ export class WishlistComponent implements OnInit {
       if (this.request.nativeElement.value.match(/^[0-9-]*$/) != null) {
         var requestApi = this.api.concat(this.isbn.concat(this.request.nativeElement.value.replace("-", "")));
         this.httpClient.get<any[]>(requestApi).subscribe(res => {
-          console.log(res);
+          //console.log(res);
           this.j = res['items'];
         })
       } else {
         var requestApi = this.api.concat(this.request.nativeElement.value.replace(" ", "+"));
         this.httpClient.get<any[]>(requestApi).subscribe(res => {
-          console.log(res);
+          //console.log(res);
           this.j = res['items'];
         }
         )
@@ -44,7 +44,7 @@ export class WishlistComponent implements OnInit {
   }
 
   test(event: any) {
-    
+
     var temp = ((((event.target.parentElement).parentElement).parentElement).innerText.split("ISBN : "));
     var ISBN = temp[temp.length - 1]
     //requeteGoogleGetLivreInfo
@@ -52,7 +52,7 @@ export class WishlistComponent implements OnInit {
     console.warn(ISBN);
     var requeteAjoutInteret = "http://localhost:3000/livres/interets/" + ISBN + '/' + this.cookieService.get('ID_USER')
     this.httpClient.post(requeteAjoutInteret, "", { responseType: 'text' }).subscribe(res => {
-      console.log(res)
+      //console.log(res)
     });
     (event.currentTarget as HTMLButtonElement).remove()
   }

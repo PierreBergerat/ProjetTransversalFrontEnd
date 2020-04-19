@@ -59,7 +59,7 @@ export class InteretsComponent implements OnInit {
     } else {
       this.genres.delete((e.currentTarget as HTMLInputElement).parentElement.innerText);
     }
-    console.log(this.genres);
+    //console.log(this.genres);
   }
   ngOnInit(): void {
   }
@@ -76,21 +76,21 @@ export class InteretsComponent implements OnInit {
        })
      }*/
     if (this.genres.size >= 5 && this.authors.size >= 5) {
-      console.log("OK");
-      console.log(this.genres);
-      console.log(this.authors);
+      //console.log("OK");
+      //console.log(this.genres);
+      //console.log(this.authors);
       this.authors.forEach(auteur => {
         var requeteAuteur = 'http://localhost:3000/verification/auteur/' + auteur;
         //console.log(requeteAuteur)
         this.http.get(requeteAuteur, { responseType: 'text' }).subscribe(response => {
-          console.log(response)
+          //console.log(response)
           var auteurvalue = JSON.parse(response)
           if (auteurvalue.ID_auteur) {
             var auteurID = auteurvalue.ID_auteur
             var requeteInteret = "http://localhost:3000/auteurs/interets/" + auteurID + '/' + this.cookieService.get('ID_USER')
-            console.log(requeteInteret)
+            //console.log(requeteInteret)
             this.http.post(requeteInteret, "", { responseType: 'text' }).subscribe(rep => {
-              console.log(rep);
+              //console.log(rep);
             })
             //AUTEUR EXISTE DEJA
           } else {
@@ -99,11 +99,11 @@ export class InteretsComponent implements OnInit {
             //console.log(postAuteur)
             this.http.post('http://localhost:3000/auteurs', postAuteur, { responseType: 'text' }).subscribe(rep => {
               var auteurID = JSON.parse(rep).id;
-              console.log(auteurID)
+              //console.log(auteurID)
               var requeteInteret = "http://localhost:3000/auteurs/interets/" + auteurID + '/' + this.cookieService.get('ID_USER')
-              console.log(requeteInteret)
+              //console.log(requeteInteret)
               this.http.post(requeteInteret, "", { responseType: 'text' }).subscribe(rep => {
-                console.log(rep);
+                //console.log(rep);
               })
               //console.log("REPONSE FINALE")
               ////console.log(r);
@@ -115,10 +115,10 @@ export class InteretsComponent implements OnInit {
         var request = 'http://localhost:3000/id/genres/' + genre
         this.http.get(request, { responseType: 'text' }).subscribe(id => {
           var genre_ID = JSON.parse(id).ID_genre;
-          console.log(genre_ID)
+          //console.log(genre_ID)
           var interetGenre = 'http://localhost:3000/genres/interets/' + genre_ID + '/' + this.cookieService.get('ID_USER');
           this.http.post(interetGenre, "", { responseType: 'text' }).subscribe(response => {
-            console.log(response);
+            //console.log(response);
           })
         })
         //requete interet auteur
@@ -133,7 +133,7 @@ export class InteretsComponent implements OnInit {
       this.router.navigate(["/display"])
     }
     else {
-      console.log("Pas ok");
+      //console.log("Pas ok");
     }
 
 
