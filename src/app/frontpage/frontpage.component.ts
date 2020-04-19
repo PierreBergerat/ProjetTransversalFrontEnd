@@ -161,8 +161,15 @@ export class FrontpageComponent implements OnInit {
             var auteurID = auteurvalue.ID_auteur
             var requeteLivreAuteur = 'http://localhost:3000/auteurs/livres/' + auteurID + '/' + this.livre_ID
             this.httpClient.post(requeteLivreAuteur, "", { responseType: 'text' }).subscribe(r => {
-              //console.log("REPONSE FINALE")
-              //console.log(r);
+              var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + this.cookieService.get("ID_USER")
+              this.httpClient.post(creditUtilisateur, "", { responseType: 'text' }).subscribe(e => {
+                this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer");
+                Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
+                  elem.value = "";
+                })
+                //console.log("REPONSE FINALE")
+                //console.log(r);
+              })
             })
           } else {
             var postAuteur = { "Nom_complet": this.auteur.nativeElement.value }
@@ -186,7 +193,6 @@ export class FrontpageComponent implements OnInit {
           }
         })
       })
-
     } else {
       this.newModal("Champs manquants", "Veuillez s'il vous plaît compléter tous les champs avant d'envoyer votre requête.", "J'ai compris")
       //console.log("Error please fill all fields");
