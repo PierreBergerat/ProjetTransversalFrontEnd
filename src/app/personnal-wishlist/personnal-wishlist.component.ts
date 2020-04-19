@@ -60,7 +60,7 @@ export class PersonnalWishlistComponent implements OnInit {
   delete(e: Event) {
     var destroyRequest = "http://localhost:3000/livres/interets/" + (e.currentTarget as HTMLButtonElement).parentElement.parentElement.parentElement.innerHTML.split("ISBN : ")[1].split("<")[0] + '/' + this.cookieService.get('ID_USER')
     this.httpClient.delete(destroyRequest).subscribe(res => {
-      //console.log(res)
+      console.log(res)
     });
     (e.currentTarget as HTMLButtonElement).parentElement.parentElement.parentElement.remove();
   }

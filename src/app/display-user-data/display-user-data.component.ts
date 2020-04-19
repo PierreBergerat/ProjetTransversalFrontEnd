@@ -151,6 +151,10 @@ export class DisplayUserDataComponent implements OnInit {
         this.httpClient.post(requetePrendreLivre, "", { responseType: 'text' }).subscribe(res => {
           var retirerCredit = "http://localhost:3000/credits/enlever/" + this.cookieService.get('ID_USER');
           this.httpClient.post(retirerCredit, "", { responseType: 'text' }).subscribe(r => {
+            var retirerInteret = "http://localhost:3000/livres/interets/" + ISBN + '/' + this.cookieService.get('ID_USER');
+            this.httpClient.delete(retirerInteret).subscribe(resultatdelete => {
+              console.log(resultatdelete)
+            })
             this.verifCredit();
             //console.log(r)
           })
