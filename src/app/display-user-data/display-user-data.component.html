@@ -24,6 +24,10 @@
     <div class="jumbotron text-left">
         <h1>Catalogue</h1>
         <h3>Vous trouverez ici tous les livres disponibles sur notre plateforme</h3>
+        <button type="button" class="collapsible" style="text-align: right;">Pourquoi ne puis-je pas prendre de livre ?</button>
+        <div class="content">
+            <p style="text-align: justify;">Notre plateforme est basée sur l'échange entre utilisateurs. Pour pouvoir prendre un livre, il faut donc que vous ayez suffisamment de crédits. Chaque livre valant un crédit, il vous faudra donner un livre avant de pouvoir en prendre un.</p>
+        </div>
     </div>
     <ul style="list-style-type: none; padding:0;">
         <li *ngFor="let a of j.slice().reverse(); let i = index">

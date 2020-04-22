@@ -38,7 +38,22 @@ export class DisplayUserDataComponent implements OnInit {
     this.modalFermer.nativeElement.innerText = fermer;
     this.trigger.nativeElement.click()
   }
-  ngOnInit() { }
+  ngOnInit() {
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  }
   ngAfterViewInit() {
     var c = 0;
     this.httpClient.get("http://localhost:3000/livres", { responseType: 'json' }).subscribe(res => {
@@ -74,10 +89,11 @@ export class DisplayUserDataComponent implements OnInit {
                     }
                   }
                 })
-                //console.log(this.livreDispoTitres)
-                this.modalTitre.nativeElement.innerText = "Nouveaux livres disponibles parmi votre liste de souhaits !";
-                this.modalFermer.nativeElement.innerText = "J'ai compris !";
-                this.trigger.nativeElement.click()
+                if (this.livresNotifs.size != 0) {
+                  this.modalTitre.nativeElement.innerText = "Nouveaux livres disponibles parmi votre liste de souhaits !";
+                  this.modalFermer.nativeElement.innerText = "J'ai compris !";
+                  this.trigger.nativeElement.click()
+                }
               }
             }
             )

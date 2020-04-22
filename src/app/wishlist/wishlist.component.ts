@@ -25,7 +25,7 @@ export class WishlistComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.request) {
+    if (this.request.nativeElement.value) {
       if (this.request.nativeElement.value.match(/^[0-9-]*$/) != null) {
         var requestApi = this.api.concat(this.isbn.concat(this.request.nativeElement.value.replace("-", "")));
         this.httpClient.get<any[]>(requestApi).subscribe(res => {

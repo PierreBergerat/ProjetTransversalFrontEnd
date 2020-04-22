@@ -70,12 +70,14 @@ export class InputUserDataFormComponent implements OnInit {
               this.router.navigate(["/display"]);
             }
           } else {
-            //console.log("Error account do not exist")
+            this.newModal("Erreur", "Le courriel ou le mot de passe n'existe pas", "Fermer")
           }
         } else {
-          //console.log("Error ");
+          this.newModal("Erreur", "Erreur lors de la connexion avec la base de données. Veuillez réessayer.", "Fermer")
         }
       });
+    } else {
+      this.newModal("Erreur", "Veuillez compléter tous les champs", "Fermer")
     }
   }
 
@@ -136,11 +138,12 @@ export class InputUserDataFormComponent implements OnInit {
             });
         } else {
           //console.log("Error. This email already exists");
+          this.newModal("Erreur", "Cet email existe déjà dans la base de données. Vous pouvez vous connecter normalement dans la section du haut ;)","Fermer")
         }
       })
     }
     else {
-      //console.log("ERROR");
+      this.newModal("Erreur","Veuillez compléter tous les champs correctement SVP.","J'ai compris");
     }
   }
 }

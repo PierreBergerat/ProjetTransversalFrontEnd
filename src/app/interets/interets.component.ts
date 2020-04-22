@@ -10,6 +10,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./interets.component.css']
 })
 export class InteretsComponent implements OnInit {
+  @ViewChild('trigger') trigger: ElementRef;
+  @ViewChild('showModal') showModal: ElementRef;
+  @ViewChild('modalTitre') modalTitre: ElementRef;
+  @ViewChild('modalContenu') modalContenu: ElementRef;
+  @ViewChild('modalFermer') modalFermer: ElementRef;
   private requete = "https://www.googleapis.com/books/v1/volumes?q=inauthor:";
   @ViewChild('auteur') auteur: ElementRef;
   @ViewChild('table') table: ElementRef;
@@ -20,6 +25,18 @@ export class InteretsComponent implements OnInit {
     this.genreForm = this.formBuilder.group({});
     this.authors = new Set<String>();
     this.genres = new Set<String>();
+  }
+
+
+  newModal(titre: String, contenu: String, fermer: String) {
+    this.modalTitre.nativeElement.innerText = titre;
+    this.modalContenu.nativeElement.innerText = contenu;
+    this.modalFermer.nativeElement.innerText = fermer;
+    this.trigger.nativeElement.click();
+  }
+
+  ngAfterViewInit() {
+    this.newModal("Choix des intérêts", "Vous allez maintenant pouvoir choisir vos intérêts pour des auteurs et genres particuliers. Veuillez en sélectionner au moins 5 de chaque catégorie", "J'ai compris")
   }
 
   ngAfterViewChecked() {
@@ -47,9 +64,6 @@ export class InteretsComponent implements OnInit {
         if (j.items) {
           this.authors.add(j.items[0].volumeInfo.authors[0].replace(". ", "."))
         }
-        else {
-          //ERROR METTRE POPUP
-        }
       })
     }
   }
@@ -63,6 +77,8 @@ export class InteretsComponent implements OnInit {
   }
   ngOnInit(): void {
   }
+
+
 
   verif() {
     /* var s = document.getElementsByClassName('custom-control-label')
@@ -133,7 +149,7 @@ export class InteretsComponent implements OnInit {
       this.router.navigate(["/display"])
     }
     else {
-      //console.log("Pas ok");
+      this.newModal("Erreur", "Veuillez entrer au moins 5 valeurs pour chaque section (auteur et genre). Merci", "J'ai compris")
     }
 
 
