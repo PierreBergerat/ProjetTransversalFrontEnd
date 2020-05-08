@@ -5,6 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { ElementRef } from '@angular/core';
+import { ResourceLoader } from '@angular/compiler';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -182,11 +184,10 @@ export class FrontpageComponent implements OnInit {
                 //console.log(r);
                 var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + this.cookieService.get("ID_USER")
                 this.httpClient.post(creditUtilisateur, "", { responseType: 'text' }).subscribe(e => {
-                  this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer");
-                  Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
-                    elem.value = "";
-                  })
-                  //console.log(e);
+                  document.getElementById('modalFermer').addEventListener("click",  () => {
+                    document.location.reload(true);
+                  });
+                  this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer"); 
                 })
               })
             });
@@ -198,5 +199,8 @@ export class FrontpageComponent implements OnInit {
       //console.log("Error please fill all fields");
     }
     this.router.navigate(['/add']);
+  }
+  reload() {
+    window.location.reload
   }
 }

@@ -23,6 +23,7 @@ export class DisplayUserDataComponent implements OnInit {
   public livresNotifs: Set<String>
   public livreDispoTitres: Array<String>
   public rest;
+  public nomEtCredits;
   constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
     this.j = new Array<String>();
     this.m = new Array<Array<String>>();
@@ -104,6 +105,19 @@ export class DisplayUserDataComponent implements OnInit {
       //console.log(this.k)
       this.verifCredit();
     })
+    if (this.cookieService.get('ID_USER')) {
+      var requestCredit = "http://localhost:3000/credits/verification/" + this.cookieService.get('ID_USER')
+      this.httpClient.get(requestCredit, { responseType: 'text' }).subscribe(response => {
+        this.httpClient.get("http://localhost:3000/clients", { responseType: 'text' }).subscribe(res => {
+          for (var i = 0; i < JSON.parse(res).length; i++) {
+            if (JSON.parse(res)[i].ID_personne == this.cookieService.get('ID_USER')) {
+              this.nomEtCredits =JSON.parse(res)[i].Prenom + ' (' + JSON.parse(response)[0].Credits + ' CR)'
+            }
+          }
+          document.getElementById('nomCredits').innerHTML = this.nomEtCredits;
+        });
+      })
+    }
   }
 
   verifCredit() {
