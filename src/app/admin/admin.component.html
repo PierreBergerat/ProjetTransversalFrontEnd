@@ -1,0 +1,84 @@
+<div class="container">
+    <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead onmouseover="this.style.cursor ='default'">
+            <tr>
+                <th style=" vertical-align: middle;" class="th-sm"
+                    onmouseover="this.style.background='#808080';this.style.color='#000000'; this.style.cursor = 'pointer';"
+                    onmouseout="this.style.background='';this.style.color='';" style="transition: all 0.25s ease;"
+                    (click)="sortByName()">Nom
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm"
+                    onmouseover="this.style.background='#808080';this.style.color='#000000'; this.style.cursor = 'pointer'"
+                    onmouseout="this.style.background='';this.style.color='';" style="transition: all 0.25s ease;"
+                    (click)="sortBySurname()">Prénom
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm">Courriel
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm">Adresse
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm">Numero de téléphone
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm"
+                    onmouseover="this.style.background='#808080';this.style.color='#000000'; this.style.cursor = 'pointer'"
+                    onmouseout="this.style.background='';this.style.color='';" style="transition: all 0.25s ease;"
+                    (click)="sortByCredits()">Credits
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm"> Supprimer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td style=" vertical-align: middle;">{{item.Nom}}</td>
+                <td style=" vertical-align: middle;">{{item.Prenom}}</td>
+                <td style=" vertical-align: middle;">{{item.Courriel}}</td>
+                <td style=" vertical-align: middle;">{{item.Adresse_client}}</td>
+                <td style="text-align: center;  vertical-align: middle;">{{item.Numero_telephone}}</td>
+                <td style="text-align: center;  vertical-align: middle;">{{item.Credits}}</td>
+                <td style="text-align: center;  vertical-align: middle;"><button type="button"
+                        class="btn btn-danger">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead onmouseover="this.style.cursor ='default'">
+            <tr>
+                <th style=" vertical-align: middle;" class="th-sm"
+                    onmouseover="this.style.background='#808080';this.style.color='#000000'; this.style.cursor = 'pointer';"
+                    onmouseout="this.style.background='';this.style.color='';" style="transition: all 0.25s ease;"
+                    (click)="sortByName()">Nom
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm"
+                    onmouseover="this.style.background='#808080';this.style.color='#000000'; this.style.cursor = 'pointer'"
+                    onmouseout="this.style.background='';this.style.color='';" style="transition: all 0.25s ease;"
+                    (click)="sortBySurname()">Prénom
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm">Courriel
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm">Adresse
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm">Numero de téléphone
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm"
+                    onmouseover="this.style.background='#808080';this.style.color='#000000'; this.style.cursor = 'pointer'"
+                    onmouseout="this.style.background='';this.style.color='';" style="transition: all 0.25s ease;"
+                    (click)="sortByCredits()">Credits
+                </th>
+                <th style=" vertical-align: middle;" class="th-sm"> Supprimer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td style=" vertical-align: middle;">{{item.Nom}}</td>
+                <td style=" vertical-align: middle;">{{item.Prenom}}</td>
+                <td style=" vertical-align: middle;">{{item.Courriel}}</td>
+                <td style=" vertical-align: middle;">{{item.Adresse_client}}</td>
+                <td style="text-align: center;  vertical-align: middle;">{{item.Numero_telephone}}</td>
+                <td style="text-align: center;  vertical-align: middle;">{{item.Credits}}</td>
+                <td style="text-align: center;  vertical-align: middle;"><button type="button"
+                        class="btn btn-danger">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

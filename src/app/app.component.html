@@ -1,32 +1,32 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<nav *ngIf="!isAdmin(); else admin" class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <a class="navbar-brand" href="/">BookShare</a>
   <ul class="navbar-nav nav ml-auto">
     <li class="nav-item">
       <a *ngIf="hasCookie(); else connection1" class="nav-link" routerLinkActive="active" routerLink="add">Ajouter un
         livre</a>
       <ng-template #connection1>
-        <a class="nav-link" routerLinkActive="active" routerLink="register">Ajouter un livre</a>
+        <a class="nav-link" routerLink="register">Ajouter un livre</a>
       </ng-template>
     </li>
     <li class="nav-item">
       <a *ngIf="hasCookie(); else connection2" class="nav-link" routerLinkActive="active"
         routerLink="display">Catalogue</a>
       <ng-template #connection2>
-        <a class="nav-link" routerLinkActive="active" routerLink="register">Catalogue</a>
+        <a class="nav-link" routerLink="register">Catalogue</a>
       </ng-template>
     </li>
     <li class="nav-item">
       <a *ngIf="hasCookie(); else connection3" class="nav-link" routerLinkActive="active" routerLink="wishlist">Liste de
         souhaits</a>
       <ng-template #connection3>
-        <a class="nav-link" routerLinkActive="active" routerLink="register">Liste de souhaits</a>
+        <a class="nav-link" routerLink="register">Liste de souhaits</a>
       </ng-template>
     </li>
     <li class="nav-item">
       <a *ngIf="hasCookie(); else connection4" class="nav-link" routerLinkActive="active"
         routerLink="recommandations">Recommandations</a>
       <ng-template #connection4>
-        <a class="nav-link" routerLinkActive="active" routerLink="register">Recommandations</a>
+        <a class="nav-link" routerLink="register">Recommandations</a>
       </ng-template>
     </li>
     <li class="nav-item">
@@ -47,6 +47,22 @@
     </li>
   </ul>
 </nav>
+<ng-template #admin>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/">BookShare</a>
+    <ul class="navbar-nav nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="admin">Tableau de bord</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="!hasCookie(); else co" class="nav-link" routerLinkActive="active" routerLink="register">Connexion</a>
+        <ng-template #co>
+          <a (click)="deleteCookie()" class="nav-link" routerLinkActive="active" routerLink="">Déconnexion</a>
+        </ng-template>
+      </li>
+    </ul>
+  </nav>
+</ng-template>
 <div class="container">
   <router-outlet>
   </router-outlet>

@@ -59,21 +59,46 @@ export class InputUserDataFormComponent implements OnInit {
       this.http.get(requestFinal, { responseType: 'text' }).subscribe(response => {
         if (response) {
           var i = JSON.parse(response);
+          console.log(JSON.parse(response))
           if (i.ID_personne) {
             this.cookieService.set('ID_USER', i.ID_personne);
-            this.cookieService.set('justConnected','1');
+            this.cookieService.set('justConnected', '1');
             //console.log(this.cookieService.get('ID_USER'));
             //console.log(this.cookieService.get('justConnected'));
-            if (this.cookieService.get("FirstCo")) { 
+            if (this.cookieService.get("FirstCo")) {
               this.router.navigate(["/interets"])
             } else {
               this.router.navigate(["/display"]);
             }
           } else {
-            this.newModal("Erreur", "Le courriel ou le mot de passe n'existe pas", "Fermer")
+            var requeteemploye = "http://localhost:3000/employes/verification/" + email + '/' + motDePasse;
+            console.log(requeteemploye)
+            this.http.get(requeteemploye, { responseType: 'text' }).subscribe(res => {
+              if (res) {
+                if (JSON.parse(res).ID_personne) {
+                  this.cookieService.set('IS_ADMIN', 'true');
+                  this.cookieService.set('ID_USER', JSON.parse(res).ID_personne);
+                  this.router.navigate(["/admin"])
+                }
+              } else {
+                this.newModal("Erreur", "Erreur lors de la connexion avec la base de données. Veuillez réessayer.", "Fermer")
+              }
+            })
           }
         } else {
-          this.newModal("Erreur", "Erreur lors de la connexion avec la base de données. Veuillez réessayer.", "Fermer")
+          var requeteemploye = "http://localhost:3000/employes/verification/" + email + '/' + motDePasse;
+          console.log(requeteemploye)
+          this.http.get(requeteemploye, { responseType: 'text' }).subscribe(res => {
+            if (res) {
+              if (JSON.parse(res).ID_personne) {
+                this.cookieService.set('IS_ADMIN', 'true');
+                this.cookieService.set('ID_USER', JSON.parse(res).ID_personne);
+                this.router.navigate(["/admin"])
+              }
+            } else {
+              this.newModal("Erreur", "Erreur lors de la connexion avec la base de données. Veuillez réessayer.", "Fermer")
+            }
+          })
         }
       });
     } else {
@@ -138,12 +163,12 @@ export class InputUserDataFormComponent implements OnInit {
             });
         } else {
           //console.log("Error. This email already exists");
-          this.newModal("Erreur", "Cet email existe déjà dans la base de données. Vous pouvez vous connecter normalement dans la section du haut ;)","Fermer")
+          this.newModal("Erreur", "Cet email existe déjà dans la base de données. Vous pouvez vous connecter normalement dans la section du haut ;)", "Fermer")
         }
       })
     }
     else {
-      this.newModal("Erreur","Veuillez compléter tous les champs correctement SVP.","J'ai compris");
+      this.newModal("Erreur", "Veuillez compléter tous les champs correctement SVP.", "J'ai compris");
     }
   }
 }

@@ -15,6 +15,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { RecommandationsComponent } from './recommandations/recommandations.component';
 import { InteretsComponent } from './interets/interets.component';
 import { PersonnalWishlistComponent } from './personnal-wishlist/personnal-wishlist.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PersonnalWishlistComponent } from './personnal-wishlist/personnal-wishl
     RecommandationsComponent,
     InteretsComponent,
     PersonnalWishlistComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
