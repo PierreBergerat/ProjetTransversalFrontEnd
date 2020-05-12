@@ -16,7 +16,7 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
-    if (this.CookieService.get('ID_USER')) {
+    if (this.CookieService.get('ID_USER') && !this.CookieService.get('IS_ADMIN')) {
       var requestCredit = "http://localhost:3000/credits/verification/" + this.CookieService.get('ID_USER')
       this.httpClient.get(requestCredit, { responseType: 'text' }).subscribe(response => {
         this.httpClient.get("http://localhost:3000/clients", { responseType: 'text' }).subscribe(res => {
@@ -26,12 +26,6 @@ export class AppComponent {
             }
           }
           document.getElementById('nomCredits').innerHTML = this.nomEtCredits;
-          var requete = "http://localhost:3000/employes/" + this.CookieService.get('ID_USER');
-          this.httpClient.get(requete, { responseType: 'text' }).subscribe(result => {
-            if (result) {
-              this.CookieService.set('IS_ADMIN', 'true');
-            }
-          })
         });
       })
     }

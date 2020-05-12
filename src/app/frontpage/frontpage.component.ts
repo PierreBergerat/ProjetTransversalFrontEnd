@@ -125,9 +125,6 @@ export class FrontpageComponent implements OnInit {
           arrayGenre.push(this.genre.nativeElement.querySelectorAll('.option-class')[i].innerText);
         };
       }
-      //console.log(arrayGenre);
-      var livre = new Livre(this.request, this.titre.nativeElement.value, this.auteur.nativeElement.value, this.description.nativeElement.value, arrayGenre, this.edition.nativeElement.value, this.anneeParution.nativeElement.value, this.langue.nativeElement.value);
-      //console.log(livre);
       var clientRequete = {
         "ID_Personne_Enregistre": Number(this.cookieService.get("ID_USER")),
         "ISBN": this.request,
@@ -135,8 +132,7 @@ export class FrontpageComponent implements OnInit {
         "Description": this.description.nativeElement.value,
         "Editeur": this.edition.nativeElement.value,
         "Annee_parution": this.anneeParution.nativeElement.value,
-        "Langue": this.langue.nativeElement.value,
-        "Verifie": 1
+        "Langue": this.langue.nativeElement.value
       }
       //console.log(clientRequete);
       this.httpClient.post('http://localhost:3000/livres', clientRequete, { responseType: 'text' }).subscribe(response => {
@@ -184,10 +180,10 @@ export class FrontpageComponent implements OnInit {
                 //console.log(r);
                 var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + this.cookieService.get("ID_USER")
                 this.httpClient.post(creditUtilisateur, "", { responseType: 'text' }).subscribe(e => {
-                  document.getElementById('modalFermer').addEventListener("click",  () => {
+                  document.getElementById('modalFermer').addEventListener("click", () => {
                     document.location.reload(true);
                   });
-                  this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer"); 
+                  this.newModal("Succès", "Votre livre a été inséré avec succès ! Merci !", "Fermer");
                 })
               })
             });

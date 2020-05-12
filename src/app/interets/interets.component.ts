@@ -86,9 +86,9 @@ export class InteretsComponent implements OnInit {
        var paquet = {
          "Genre": s[i].innerHTML
        }
-       console.log(paquet)
+       //console.log(paquet)
        this.http.post("http://localhost:3000/genres", paquet, { responseType: 'text' }).subscribe(res => {
-         console.log(res)
+         //console.log(res)
        })
      }*/
     if (this.genres.size >= 5 && this.authors.size >= 5) {

@@ -46,8 +46,8 @@ export class RecommandationsComponent implements OnInit {
               this.j.add(element)
             }
           });
-          console.log(this.set)
-          console.log(this.j)
+          //console.log(this.set)
+          //console.log(this.j)
           this.verifCredit()
         })
       })
