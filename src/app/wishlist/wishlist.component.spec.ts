@@ -21,6 +21,5 @@ describe('WishlistComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    
   });
 });

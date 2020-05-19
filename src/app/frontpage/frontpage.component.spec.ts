@@ -21,6 +21,5 @@ describe('FrontpageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    
   });
 });
