@@ -21,5 +21,6 @@ describe('DisplayUserDataComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    
   });
 });

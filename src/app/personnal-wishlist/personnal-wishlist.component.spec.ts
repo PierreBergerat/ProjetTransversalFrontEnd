@@ -21,5 +21,6 @@ describe('PersonnalWishlistComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    
   });
 });

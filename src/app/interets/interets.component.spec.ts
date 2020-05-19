@@ -21,5 +21,6 @@ describe('InteretsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    
   });
 });
