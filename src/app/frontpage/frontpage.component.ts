@@ -109,16 +109,11 @@ export class FrontpageComponent implements OnInit {
     } else {
       //console.log("error");
     }
-  } ngOnInit(): void {
-    if (this.cookieService.get('ID_USER')) {
-      //console.log("Got an ID");
-    } else {
-      //console.log("Alors on est pas co ?");
-    };
-  }
+  } ngOnInit(): void {}
+  
   onSubmit() {
     // Process checkout data here
-    if (this.titre.nativeElement.value && this.titre.nativeElement.value && this.auteur.nativeElement.value && this.description.nativeElement.value && this.genre.nativeElement.value && this.edition.nativeElement.value && this.anneeParution.nativeElement.value && this.langue.nativeElement.value) {
+    if (this.titre.nativeElement.value && this.auteur.nativeElement.value && this.description.nativeElement.value && this.genre.nativeElement.value && this.edition.nativeElement.value && this.anneeParution.nativeElement.value && this.langue.nativeElement.value) {
       var arrayGenre = new Array<String>();
       for (var i = 0; i < 72; i++) {
         if (this.genre.nativeElement.querySelectorAll('.option-class')[i].selected) {
