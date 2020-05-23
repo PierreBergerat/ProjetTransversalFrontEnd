@@ -1,6 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InteretsComponent } from './interets.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('InteretsComponent', () => {
   let component: InteretsComponent;
@@ -8,7 +11,7 @@ describe('InteretsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InteretsComponent ]
+      declarations: [ InteretsComponent ], imports:[HttpClientModule, ReactiveFormsModule, FormsModule, RouterTestingModule]
     })
     .compileComponents();
   }));

@@ -1,6 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FrontpageComponent } from './frontpage.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 describe('FrontpageComponent', () => {
   let component: FrontpageComponent;
@@ -8,9 +11,9 @@ describe('FrontpageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FrontpageComponent ]
+      declarations: [FrontpageComponent], imports: [HttpClientModule, RouterTestingModule, ReactiveFormsModule, FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

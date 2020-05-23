@@ -1,6 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PersonnalWishlistComponent } from './personnal-wishlist.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PersonnalWishlistComponent', () => {
   let component: PersonnalWishlistComponent;
@@ -8,7 +10,7 @@ describe('PersonnalWishlistComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonnalWishlistComponent ]
+      declarations: [ PersonnalWishlistComponent ], imports:[RouterTestingModule, HttpClientModule]
     })
     .compileComponents();
   }));

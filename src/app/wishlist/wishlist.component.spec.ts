@@ -1,3 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WishlistComponent } from './wishlist.component';
@@ -7,10 +11,11 @@ describe('WishlistComponent', () => {
   let fixture: ComponentFixture<WishlistComponent>;
 
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
-      declarations: [ WishlistComponent ]
+      declarations: [WishlistComponent], imports: [ReactiveFormsModule, FormsModule, RouterTestingModule, HttpClientModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +27,8 @@ describe('WishlistComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('j should be undefined',()=>{
+    expect(component.j).toBe(undefined);
+  })
 });
