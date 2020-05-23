@@ -34,7 +34,6 @@ export class AppComponent {
     return this.CookieService.get('ID_USER');
   }
   deleteCookie() {
-    //console.log("click")
     this.CookieService.deleteAll();
   }
   constructor(private CookieService: CookieService, private httpClient: HttpClient) { }

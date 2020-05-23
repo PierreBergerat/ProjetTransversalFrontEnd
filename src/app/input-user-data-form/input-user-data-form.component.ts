@@ -55,16 +55,12 @@ export class InputUserDataFormComponent implements OnInit {
       var email = this.emailco.nativeElement.value;
       var motDePasse = this.passco.nativeElement.value;
       var requestFinal = request + '/' + email + '/' + motDePasse;
-      //console.log(requestFinal);
       this.http.get(requestFinal, { responseType: 'text' }).subscribe(response => {
         if (response) {
           var i = JSON.parse(response);
-          console.log(JSON.parse(response))
           if (i.ID_personne) {
             this.cookieService.set('ID_USER', i.ID_personne);
             this.cookieService.set('justConnected', '1');
-            //console.log(this.cookieService.get('ID_USER'));
-            //console.log(this.cookieService.get('justConnected'));
             if (this.cookieService.get("FirstCo")) {
               this.router.navigate(["/interets"])
             } else {
@@ -72,7 +68,6 @@ export class InputUserDataFormComponent implements OnInit {
             }
           } else {
             var requeteemploye = "http://localhost:3000/employes/verification/" + email + '/' + motDePasse;
-            console.log(requeteemploye)
             this.http.get(requeteemploye, { responseType: 'text' }).subscribe(res => {
               if (res) {
                 if (JSON.parse(res).ID_personne) {
@@ -87,7 +82,6 @@ export class InputUserDataFormComponent implements OnInit {
           }
         } else {
           var requeteemploye = "http://localhost:3000/employes/verification/" + email + '/' + motDePasse;
-          console.log(requeteemploye)
           this.http.get(requeteemploye, { responseType: 'text' }).subscribe(res => {
             if (res) {
               if (JSON.parse(res).ID_personne) {
@@ -126,7 +120,6 @@ export class InputUserDataFormComponent implements OnInit {
         this.num.nativeElement.value,
         this.courriel.nativeElement.value,
         this.motdepasse1.nativeElement.value, 0)
-      //console.log(client);
       var personne = {
         "Nom": client.nom,
         "Prenom": client.prenom,
@@ -134,15 +127,12 @@ export class InputUserDataFormComponent implements OnInit {
         "Nationalite": client.nationalite
       };
       var verifmail = "http://localhost:3000/clients/verificationMAIL/" + this.courriel.nativeElement.value
-      //console.log(verifmail);
       this.http.get(verifmail, { responseType: 'text' }).subscribe(res => {
         var k = JSON.parse(res)
-        //console.log(k.resultat);
         if (k.resultat == false) {
           this.http.post('http://localhost:3000/personnes', personne, { responseType: 'text' })
             .subscribe(response => {
               var j = JSON.parse(response);
-              //console.log(j.id);
               var personne2 = {
                 "ID_personne": j.id,
                 "Numero_telephone": client.num,
@@ -153,7 +143,6 @@ export class InputUserDataFormComponent implements OnInit {
               };
               this.http.post('http://localhost:3000/clients', personne2, { responseType: 'text' }).subscribe(response => {
                 var i = JSON.parse(response);
-                //console.log(i);
                 Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
                   elem.value = "";
                 })
@@ -162,7 +151,6 @@ export class InputUserDataFormComponent implements OnInit {
               });
             });
         } else {
-          //console.log("Error. This email already exists");
           this.newModal("Erreur", "Cet email existe déjà dans la base de données. Vous pouvez vous connecter normalement dans la section du haut ;)", "Fermer")
         }
       })

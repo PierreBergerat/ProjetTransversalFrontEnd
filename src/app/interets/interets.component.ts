@@ -73,7 +73,6 @@ export class InteretsComponent implements OnInit {
     } else {
       this.genres.delete((e.currentTarget as HTMLInputElement).parentElement.innerText);
     }
-    //console.log(this.genres);
   }
   ngOnInit(): void {
   }
@@ -81,48 +80,23 @@ export class InteretsComponent implements OnInit {
 
 
   verif() {
-    /* var s = document.getElementsByClassName('custom-control-label')
-     for (var i = 0; i < s.length; i++) {
-       var paquet = {
-         "Genre": s[i].innerHTML
-       }
-       //console.log(paquet)
-       this.http.post("http://localhost:3000/genres", paquet, { responseType: 'text' }).subscribe(res => {
-         //console.log(res)
-       })
-     }*/
     if (this.genres.size >= 5 && this.authors.size >= 5) {
-      //console.log("OK");
-      //console.log(this.genres);
-      //console.log(this.authors);
       this.authors.forEach(auteur => {
         var requeteAuteur = 'http://localhost:3000/verification/auteur/' + auteur;
-        //console.log(requeteAuteur)
         this.http.get(requeteAuteur, { responseType: 'text' }).subscribe(response => {
-          //console.log(response)
           var auteurvalue = JSON.parse(response)
           if (auteurvalue.ID_auteur) {
             var auteurID = auteurvalue.ID_auteur
             var requeteInteret = "http://localhost:3000/auteurs/interets/" + auteurID + '/' + this.cookieService.get('ID_USER')
-            //console.log(requeteInteret)
             this.http.post(requeteInteret, "", { responseType: 'text' }).subscribe(rep => {
-              //console.log(rep);
             })
-            //AUTEUR EXISTE DEJA
           } else {
-            //AJOUTER AUTEUR
             var postAuteur = { "Nom_complet": auteur }
-            //console.log(postAuteur)
             this.http.post('http://localhost:3000/auteurs', postAuteur, { responseType: 'text' }).subscribe(rep => {
               var auteurID = JSON.parse(rep).id;
-              //console.log(auteurID)
               var requeteInteret = "http://localhost:3000/auteurs/interets/" + auteurID + '/' + this.cookieService.get('ID_USER')
-              //console.log(requeteInteret)
               this.http.post(requeteInteret, "", { responseType: 'text' }).subscribe(rep => {
-                //console.log(rep);
               })
-              //console.log("REPONSE FINALE")
-              //console.log(r);
             })
           }
         })
@@ -131,14 +105,10 @@ export class InteretsComponent implements OnInit {
         var request = 'http://localhost:3000/id/genres/' + genre
         this.http.get(request, { responseType: 'text' }).subscribe(id => {
           var genre_ID = JSON.parse(id).ID_genre;
-          //console.log(genre_ID)
           var interetGenre = 'http://localhost:3000/genres/interets/' + genre_ID + '/' + this.cookieService.get('ID_USER');
           this.http.post(interetGenre, "", { responseType: 'text' }).subscribe(response => {
-            //console.log(response);
           })
         })
-        //requete interet auteur
-        //requete interet genre
       })
       Array.prototype.slice.call(document.getElementsByClassName('nav-link')).forEach(elem => {
         elem.style.display = ""
@@ -151,7 +121,5 @@ export class InteretsComponent implements OnInit {
     else {
       this.newModal("Erreur", "Veuillez entrer au moins 5 valeurs pour chaque section (auteur et genre). Merci", "J'ai compris")
     }
-
-
   }
 }

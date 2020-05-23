@@ -65,16 +65,10 @@ export class DisplayUserDataComponent implements OnInit {
         this.getGenre(res[i].ID_Livre, i)
         this.getAuteur(res[i].ID_Livre, i)
       }
-      //console.log(this.j)
       if (this.cookieService.get('justConnected') == '1') {
-        //console.log("TRUE")
         var requete = "http://localhost:3000/livres/interetsPERSONNE/" + this.cookieService.get('ID_USER');
         this.httpClient.get(requete, { responseType: 'text' }).subscribe(response => {
-          //console.log(response)
-          if (res == '[]') { //console.log("Pas de notifs")
-          }
           Array.prototype.slice.call(JSON.parse(response)).forEach(elem => {
-            //console.log("cc")
             var apiRequest = "http://localhost:3000/livres/disponible/" + elem.ISBN_livre
             this.httpClient.get(apiRequest, { responseType: 'text' }).subscribe(reponse => {
               if (JSON.parse(reponse)[0]) {
@@ -82,7 +76,6 @@ export class DisplayUserDataComponent implements OnInit {
               }
               c++;
               if (c == JSON.parse(response).length) {
-                //console.log("Fin ?")
                 this.livresNotifs.forEach(id => {
                   for (var i = 0; i < this.j.length; i++) {
                     if (res[i].ID_Livre == id) {
@@ -102,7 +95,6 @@ export class DisplayUserDataComponent implements OnInit {
         })
         this.cookieService.delete('justConnected')
       }
-      //console.log(this.k)
       this.verifCredit();
     })
     if (this.cookieService.get('ID_USER')) {
@@ -111,7 +103,7 @@ export class DisplayUserDataComponent implements OnInit {
         this.httpClient.get("http://localhost:3000/clients", { responseType: 'text' }).subscribe(res => {
           for (var i = 0; i < JSON.parse(res).length; i++) {
             if (JSON.parse(res)[i].ID_personne == this.cookieService.get('ID_USER')) {
-              this.nomEtCredits =JSON.parse(res)[i].Prenom + ' (' + JSON.parse(response)[0].Credits + ' CR)'
+              this.nomEtCredits = JSON.parse(res)[i].Prenom + ' (' + JSON.parse(response)[0].Credits + ' CR)'
             }
           }
           document.getElementById('nomCredits').innerHTML = this.nomEtCredits;
@@ -125,7 +117,6 @@ export class DisplayUserDataComponent implements OnInit {
     this.httpClient.get(requestCredit, { responseType: 'text' }).subscribe(response => {
       var j = JSON.parse(response);
       if (j[0].Credits <= 0) {
-        //console.log("true")
         Array.prototype.slice.call(document.getElementsByClassName('clickable')).forEach(elem => {
           elem.style.display = "none";
         })
@@ -133,14 +124,12 @@ export class DisplayUserDataComponent implements OnInit {
         Array.prototype.slice.call(document.getElementsByClassName('clickable')).forEach(elem => {
           elem.style.display = "";
         })
-        //console.log("assez de crédit")
       }
 
     })
   }
 
   getImage(ISBN: String, index: number) {
-    //console.log(ISBN)
     var r = "https://www.googleapis.com/books/v1/volumes?q=isbn%3D" + ISBN
     this.httpClient.get(r, { responseType: 'text' }).subscribe(reponse => {
       var json = JSON.parse(reponse);
@@ -165,7 +154,6 @@ export class DisplayUserDataComponent implements OnInit {
   getAuteur(ID_Livre: String, index: number) {
     var r = 'http://localhost:3000/liste/auteur/' + ID_Livre
     this.httpClient.get(r, { responseType: 'text' }).subscribe(reponse => {
-      //console.log(reponse)
       var mgcstf = JSON.parse(reponse)
       this.p[index] = mgcstf;
     })
@@ -183,10 +171,8 @@ export class DisplayUserDataComponent implements OnInit {
           this.httpClient.post(retirerCredit, "", { responseType: 'text' }).subscribe(r => {
             var retirerInteret = "http://localhost:3000/livres/interets/" + ISBN + '/' + this.cookieService.get('ID_USER');
             this.httpClient.delete(retirerInteret).subscribe(resultatdelete => {
-              //console.log(resultatdelete)
             })
             this.verifCredit();
-            //console.log(r)
           })
         })
       }

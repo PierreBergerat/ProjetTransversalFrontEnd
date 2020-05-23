@@ -107,12 +107,10 @@ export class FrontpageComponent implements OnInit {
       }
       )
     } else {
-      //console.log("error");
     }
-  } ngOnInit(): void {}
-  
+  } ngOnInit(): void { }
+
   onSubmit() {
-    // Process checkout data here
     if (this.titre.nativeElement.value && this.auteur.nativeElement.value && this.description.nativeElement.value && this.genre.nativeElement.value && this.edition.nativeElement.value && this.anneeParution.nativeElement.value && this.langue.nativeElement.value) {
       var arrayGenre = new Array<String>();
       for (var i = 0; i < 72; i++) {
@@ -129,7 +127,6 @@ export class FrontpageComponent implements OnInit {
         "Annee_parution": this.anneeParution.nativeElement.value,
         "Langue": this.langue.nativeElement.value
       }
-      //console.log(clientRequete);
       this.httpClient.post('http://localhost:3000/livres', clientRequete, { responseType: 'text' }).subscribe(response => {
         var r = JSON.parse(response);
         this.livre_ID = r.id;
@@ -137,17 +134,13 @@ export class FrontpageComponent implements OnInit {
           var request = 'http://localhost:3000/id/genres/' + genre
           this.httpClient.get(request, { responseType: 'text' }).subscribe(id => {
             var genre_ID = JSON.parse(id).ID_genre;
-            //console.log(genre_ID);
             var requestGenreLivre = 'http://localhost:3000/genres/livres/' + genre_ID + '/' + this.livre_ID
             this.httpClient.post(requestGenreLivre, "", { responseType: 'text' }).subscribe(resultat => {
               var t = JSON.parse(resultat)
-              //console.log(t)
-
             })
           })
         })
         var requeteAuteur = 'http://localhost:3000/verification/auteur/' + this.auteur.nativeElement.value;
-        //console.log(requeteAuteur)
         this.httpClient.get(requeteAuteur, { responseType: 'text' }).subscribe(response => {
           var auteurvalue = JSON.parse(response)
           if (auteurvalue.ID_auteur) {
@@ -160,19 +153,15 @@ export class FrontpageComponent implements OnInit {
                 Array.prototype.slice.call(document.getElementsByTagName('input')).forEach(elem => {
                   elem.value = "";
                 })
-                //console.log("REPONSE FINALE")
-                //console.log(r);
               })
             })
           } else {
             var postAuteur = { "Nom_complet": this.auteur.nativeElement.value }
-            //console.log(postAuteur)
+
             this.httpClient.post('http://localhost:3000/auteurs', postAuteur, { responseType: 'text' }).subscribe(rep => {
               var auteurID = JSON.parse(rep).id;
               var requeteLivreAuteur = 'http://localhost:3000/auteurs/livres/' + auteurID + '/' + this.livre_ID
               this.httpClient.post(requeteLivreAuteur, "", { responseType: 'text' }).subscribe(r => {
-                //console.log("REPONSE FINALE")
-                //console.log(r);
                 var creditUtilisateur = 'http://localhost:3000/credits/ajouter/' + this.cookieService.get("ID_USER")
                 this.httpClient.post(creditUtilisateur, "", { responseType: 'text' }).subscribe(e => {
                   document.getElementById('modalFermer').addEventListener("click", () => {
@@ -187,7 +176,6 @@ export class FrontpageComponent implements OnInit {
       })
     } else {
       this.newModal("Champs manquants", "Veuillez s'il vous plaît compléter tous les champs avant d'envoyer votre requête.", "J'ai compris")
-      //console.log("Error please fill all fields");
     }
     this.router.navigate(['/add']);
   }

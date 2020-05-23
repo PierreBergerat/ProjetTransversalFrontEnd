@@ -69,7 +69,6 @@ export class AdminComponent implements OnInit {
 
   validation(titre: String, e: Event) {
     var requete = "http://localhost:3000/livres/verifier/" + (e.target as HTMLButtonElement).parentElement.parentElement.id + "/" + this.cookieService.get('ID_USER');
-    console.log(requete);
     this.httpClient.post(requete, { responseType: 'text' }).subscribe(res => {
       if (res) {
         this.modalTitre.nativeElement.innerText = "Vérification";

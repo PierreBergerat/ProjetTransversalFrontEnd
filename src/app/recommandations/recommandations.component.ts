@@ -46,15 +46,10 @@ export class RecommandationsComponent implements OnInit {
               this.j.add(element)
             }
           });
-          //console.log(this.set)
-          //console.log(this.j)
           this.verifCredit()
         })
       })
     })
-    //requeteBoth
-    //requeteAuteur
-    //requeteGenre
   }
 
   newModal(titre: String, contenu: String, fermer: String) {
@@ -68,7 +63,6 @@ export class RecommandationsComponent implements OnInit {
     this.httpClient.get(requestCredit, { responseType: 'text' }).subscribe(response => {
       var j = JSON.parse(response);
       if (j[0].Credits <= 0) {
-        //console.log("true")
         Array.prototype.slice.call(document.getElementsByClassName('clickable')).forEach(elem => {
           elem.style.display = "none";
         })
@@ -76,14 +70,12 @@ export class RecommandationsComponent implements OnInit {
         Array.prototype.slice.call(document.getElementsByClassName('clickable')).forEach(elem => {
           elem.style.display = "";
         })
-        //console.log("assez de crédit")
       }
     })
   }
   takeLivre(e: Event) {
 
     var ISBN = (e.currentTarget as HTMLButtonElement).parentElement.parentElement.parentElement.innerHTML.split("ISBN : ")[1].split('<')[0];
-    //console.log(ISBN);
     (e.currentTarget as HTMLButtonElement).remove();
     for (var i = 0; i < this.j.size; i++) {
       if (this.j[i].ISBN == ISBN) {
@@ -93,7 +85,6 @@ export class RecommandationsComponent implements OnInit {
           var retirerCredit = "http://localhost:3000/credits/enlever/" + this.cookieService.get('ID_USER');
           this.httpClient.post(retirerCredit, "", { responseType: 'text' }).subscribe(r => {
             this.verifCredit();
-            //console.log(r)
           })
         })
       }
