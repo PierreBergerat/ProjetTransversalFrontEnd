@@ -1,0 +1,47 @@
+{
+    "@context": "http://iiif.io/api/presentation/3/context.json",
+    "id": "http://localhost:3000/collection.json",
+    "type": "Collection",
+    "label": {
+        "fr": [
+            "Collection de Saussure"
+        ]
+    },
+    "summary": {
+        "fr": [
+            "Archives, notes et autres"
+        ]
+    },
+    "requiredStatement": {
+        "label": {
+            "fr": [
+                "Attribution"
+            ]
+        },
+        "value": {
+            "fr": [
+                "Collections des ecrits de Ferdinand de Saussure"
+            ]
+        }
+    },
+    "items": [
+        {
+            "id": "http://localhost:3000/manifestes/arch_saussure_361.json",
+            "type": "Manifest",
+            "label": {
+                "en": [
+                    "arch_saussure_361"
+                ]
+            }
+        },
+        {
+            "id": "http://localhost:3000/manifestes/arch_saussure_361.json",
+            "type": "Manifest",
+            "label": {
+                "en": [
+                    "arch_saussure_361"
+                ]
+            }
+        }
+    ]
+}
