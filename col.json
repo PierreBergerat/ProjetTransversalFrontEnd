@@ -1,6 +1,11 @@
 {
     "@context": "http://iiif.io/api/presentation/3/context.json",
     "id": "https://raw.githubusercontent.com/PierreBergerat/ProjetTransversalFrontEnd/master/col.json",
+    "service": {
+        "@context": "http://iiif.io/api/search/1/context.json",
+        "@id": "http://localhost:5000/collection/search",
+        "profile": "http://iiif.io/api/search/1/search"
+    },
     "type": "Collection",
     "label": {
         "fr": [
