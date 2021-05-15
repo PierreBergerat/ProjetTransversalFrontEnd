@@ -517,7 +517,7 @@
     "service": [
         {
             "@context": "http://iiif.io/api/search/0/context.json",
-            "@id": "http://localhost:5000/search",
+            "@id": "http://localhost:5000/search/manifest2.json",
             "profile": "http://iiif.io/api/search/0/search",
             "label": "Search within this thing"
         }
