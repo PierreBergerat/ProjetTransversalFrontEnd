@@ -1,6 +1,6 @@
 {
   "@context": "http://iiif.io/api/presentation/2/context.json",
-  "@id": "https://scta.info/iiif/plaoulcommentary/svict/manifest",
+  "@id": "https://raw.githubusercontent.com/PierreBergerat/ProjetTransversalFrontEnd/master/manifest(1).json",
   "@type": "sc:Manifest",
   "label": "plaoulcommentary/svict",
   "description": "Manifest Description",
