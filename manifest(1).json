@@ -9,7 +9,7 @@
     "@context": "http://iiif.io/api/search/1/context.json",
     "@id": "http://localhost:5000/search/manifest(1).json",
     "profile": "http://iiif.io/api/search/1/search",
-    "label": "Search within this manifest"
+    "label": "Search ithin this manifest"
   },
   "sequences": [
     {
