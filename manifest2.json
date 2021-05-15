@@ -1,6 +1,6 @@
 {
     "@context": "http://iiif.io/api/presentation/2/context.json",
-    "@id": "https://d.lib.ncsu.edu/collections/catalog/nubian-message-2003-04-01/manifest",
+    "@id": "https://raw.githubusercontent.com/PierreBergerat/ProjetTransversalFrontEnd/master/manifest2.json",
     "@type": "sc:Manifest",
     "label": "Nubian Message, April 1, 2003",
     "related": {
