@@ -517,14 +517,9 @@
     "service": [
         {
             "@context": "http://iiif.io/api/search/0/context.json",
-            "@id": "https://ocr.lib.ncsu.edu/search/nubian-message-2003-04-01",
+            "@id": "http://localhost:5000/search",
             "profile": "http://iiif.io/api/search/0/search",
             "label": "Search within this thing",
-            "service": {
-                "@id": "https://ocr.lib.ncsu.edu/suggest/nubian-message-2003-04-01",
-                "profile": "http://iiif.io/api/search/0/autocomplete",
-                "label": "Get suggested words"
-            }
         }
     ],
     "seeAlso": [
