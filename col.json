@@ -1,6 +1,6 @@
 {
     "@context": "http://iiif.io/api/presentation/3/context.json",
-    "id": "http://localhost:3000/collection.json",
+    "id": "https://raw.githubusercontent.com/PierreBergerat/ProjetTransversalFrontEnd/master/col.json",
     "type": "Collection",
     "label": {
         "fr": [
@@ -26,20 +26,20 @@
     },
     "items": [
         {
-            "id": "http://localhost:3000/manifestes/arch_saussure_361.json",
+            "id": "https://raw.githubusercontent.com/PierreBergerat/ProjetTransversalFrontEnd/master/manifest(1).json",
             "type": "Manifest",
             "label": {
                 "en": [
-                    "arch_saussure_361"
+                    "manifeste_1"
                 ]
             }
         },
         {
-            "id": "http://localhost:3000/manifestes/arch_saussure_361.json",
+            "id": "https://raw.githubusercontent.com/PierreBergerat/ProjetTransversalFrontEnd/master/manifest2.json",
             "type": "Manifest",
             "label": {
                 "en": [
-                    "arch_saussure_361"
+                    "manifeste_2"
                 ]
             }
         }
