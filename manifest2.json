@@ -519,7 +519,7 @@
             "@context": "http://iiif.io/api/search/0/context.json",
             "@id": "http://localhost:5000/search",
             "profile": "http://iiif.io/api/search/0/search",
-            "label": "Search within this thing",
+            "label": "Search within this thing"
         }
     ],
     "seeAlso": [
